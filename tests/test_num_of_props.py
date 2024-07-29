@@ -21,5 +21,8 @@ def test_displays_num_of_properties(chrome_browser):
 
     chrome_browser.get("http://127.0.0.1:5000")
     body_tag = chrome_browser.find_element(By.TAG_NAME, "body")
+    regex_find_num_of_properties = re.search(r"\d+", body_tag.text)
+    number_of_properties = int(regex_find_num_of_properties.group())
 
     assert body_tag.text == "Properties : 4"
+    assert number_of_properties == 4
