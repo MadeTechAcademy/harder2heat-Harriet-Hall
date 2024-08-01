@@ -1,15 +1,19 @@
 from src.property import Property
-
+import pytest
 import json
 
 with open("../properties.json", "r") as data:
     dummy_data = json.load(data)
     dummy_data_properties = dummy_data[0]["properties"]
-    
-dummy_property = Property(dummy_data_properties["uprnreference"][0]["uprn"])
+ 
+  
+@pytest.fixture
+def dummy_property():
+    property = Property(dummy_data_properties["uprnreference"][0]["uprn"])    
+    yield property
 
 
-def test_property_class_has_correct_attributes_from_dummy_data():
+def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
     dummy_property.connectivity = dummy_data_properties["connectivity"]
     dummy_property.year = dummy_data_properties["buildingage_year"]
     dummy_property.material = dummy_data_properties["constructionmaterial"]
@@ -47,12 +51,18 @@ def test_property_class_has_correct_attributes_from_dummy_data():
     assert dummy_property.osid == "02ae4ae4-6119-4d72-aef9-e56013d25e0d"
     
  
-def test_handle_year_string_with_buildingage_year_as_None():
+def test_handle_year_string_with_buildingage_year_as_None(dummy_property):
+    dummy_property.year = dummy_data_properties["buildingage_year"]
     dummy_property.handle_year_string()
     assert dummy_property.year == 1959
 
-def test_handle_year_string_with_buildingage_year():
+def test_handle_year_string_with_buildingage_year(dummy_property):
     dummy_property.year = 1999
     dummy_property.handle_year_string()
     assert dummy_property.year == 1999
  
+    
+def test_handle_year_string_with_buildingage_year_is_period(dummy_property):
+    dummy_property.year = dummy_data_properties["buildingage_period"]
+    dummy_property.handle_year_string()
+    assert dummy_property.year == 1989
