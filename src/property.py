@@ -17,7 +17,7 @@ class Property():
         self.long = 0
         self.lat = 0
         self.coordinates = []
-        self.size = ""
+        self.size = 0
         self.osid = ""
         self.age_updated_date = ""
         
@@ -39,7 +39,7 @@ class Property():
         return score
     
     def handle_year_string(self):
-        if self.year == "Unknown":
+        if self.year == "None":
             self.year = MINIMUM_FAILING_year
         year_is_int = type(self.year) is int
         if not year_is_int:
