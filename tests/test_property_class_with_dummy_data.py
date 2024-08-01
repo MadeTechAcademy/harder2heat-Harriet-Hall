@@ -46,8 +46,13 @@ def test_property_class_has_correct_attributes_from_dummy_data():
     assert dummy_property.size == 111.601
     assert dummy_property.osid == "02ae4ae4-6119-4d72-aef9-e56013d25e0d"
     
-    
  
 def test_handle_year_string_with_buildingage_year_as_None():
     dummy_property.handle_year_string()
     assert dummy_property.year == 1959
+
+def test_handle_year_string_with_buildingage_year():
+    dummy_property.year = 1999
+    dummy_property.handle_year_string()
+    assert dummy_property.year == 1999
+ 
