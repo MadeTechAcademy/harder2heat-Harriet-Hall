@@ -1,5 +1,5 @@
 MINIMUM_EPC_RATING = "C"
-MINIMUM_FAILING_year = 1959
+MINIMUM_FAILING_YEAR = 1959
 COLD_CONNECTIVITY = "Standalone"
 WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
 
@@ -32,7 +32,7 @@ class Property():
             score += 1
         if self.epc_rating > MINIMUM_EPC_RATING or self.epc_rating == "":
             score += 1
-        if self.year <= MINIMUM_FAILING_year and self.year > 0:
+        if self.year <= MINIMUM_FAILING_YEAR and self.year > 0:
             score += 1
 
         self.score = score
@@ -40,7 +40,7 @@ class Property():
     
     def handle_year_string(self):
         if self.year == "None":
-            self.year = MINIMUM_FAILING_year
+            self.year = MINIMUM_FAILING_YEAR
         year_is_int = type(self.year) is int
         if not year_is_int:
             self.year = int(self.year[-4:])
