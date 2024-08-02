@@ -1,6 +1,10 @@
 MINIMUM_EPC_RATING = "C"
 MINIMUM_FAILING_YEAR = 1959
-COLD_CONNECTIVITY = "Standalone"
+CONNECTIVITY_VALUES = {
+    "Standalone": "Free-Standing",
+    "Semi-Connected" : "Dual-Connected",
+    "End-Connected" : "Single-Connected"  
+}
 WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
 
 class Property():
@@ -45,8 +49,10 @@ class Property():
         if not year_is_int:
             self.year = int(self.year[-4:])
             
+    def handle_connectivity(self):
+       if self.connectivity == "Standalone":
+           self.connectivity = CONNECTIVITY_VALUES["Standalone"]
+   
             
-    
-    #metric 
-    #year //DONE
-    #connectivity 
+        
+        

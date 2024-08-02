@@ -38,3 +38,9 @@ def test_handle_year_string_with_buildingage_period():
     property.year = "1980-1989"
     property.handle_year_string()
     assert property.year == 1989
+    
+def test_handle_connectivity_with_standalone():
+    property.connectivity = "Standalone"
+    property.handle_connectivity() 
+    assert property.connectivity == "Free-Standing"
+
