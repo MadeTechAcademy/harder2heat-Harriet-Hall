@@ -33,3 +33,8 @@ def test_handle_year_string_with_year_known():
     property.year = 1999
     property.handle_year_string()
     assert property.year == 1999
+    
+def test_handle_year_string_with_buildingage_period():
+    property.year = "1980-1989"
+    property.handle_year_string()
+    assert property.year == 1989
