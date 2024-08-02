@@ -4,26 +4,26 @@ import json
 
 with open("./properties.json", "r") as data:
     dummy_data = json.load(data)
-    dummy_data_properties = dummy_data[0]["properties"]
+dummy_data_property = dummy_data[0]["properties"]
  
   
 @pytest.fixture
 def dummy_property():
-    property = Property(dummy_data_properties["uprnreference"][0]["uprn"])    
+    property = Property(dummy_data_property["uprnreference"][0]["uprn"])    
     yield property
 
 
 def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
-    dummy_property.connectivity = dummy_data_properties["connectivity"]
-    dummy_property.year = dummy_data_properties["buildingage_year"]
-    dummy_property.material = dummy_data_properties["constructionmaterial"]
+    dummy_property.connectivity = dummy_data_property["connectivity"]
+    dummy_property.year = dummy_data_property["buildingage_year"]
+    dummy_property.material = dummy_data_property["constructionmaterial"]
     coordinates_list = dummy_data[0]["geometry"]["coordinates"][0]
     dummy_property.coordinates = coordinates_list
     dummy_property.long = coordinates_list[0][0]
     dummy_property.lat = coordinates_list[0][1]
-    dummy_property.size = dummy_data_properties["geometry_area_m2"]
-    dummy_property.osid = dummy_data_properties["osid"]
-    dummy_property.age_updated_date = dummy_data_properties["buildingage_updatedate"]
+    dummy_property.size = dummy_data_property["geometry_area_m2"]
+    dummy_property.osid = dummy_data_property["osid"]
+    dummy_property.age_updated_date = dummy_data_property["buildingage_updatedate"]
     
     
     assert dummy_property.uprn == 100090062842
@@ -51,7 +51,7 @@ def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
     
  
 def test_handle_year_string_with_buildingage_year_as_None(dummy_property):
-    dummy_property.year = dummy_data_properties["buildingage_year"]
+    dummy_property.year = dummy_data_property["buildingage_year"]
     dummy_property.handle_year_string()
     assert dummy_property.year == 1959
 
@@ -62,13 +62,12 @@ def test_handle_year_string_with_buildingage_year(dummy_property):
  
     
 def test_handle_year_string_with_buildingage_year_is_period(dummy_property):
-    dummy_property.year = dummy_data_properties["buildingage_period"]
+    dummy_property.year = dummy_data_property["buildingage_period"]
     dummy_property.handle_year_string()
     assert dummy_property.year == 1989
 
      
 def test_handle_connectivity_with_semi_connected(dummy_property):
-    dummy_property.connectivity = dummy_data_properties["connectivity"]
+    dummy_property.connectivity = dummy_data_property["connectivity"]
     dummy_property.handle_connectivity()
     assert dummy_property.connectivity == "Dual-Connected"
-    
