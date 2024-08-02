@@ -22,3 +22,11 @@ def test_property_has_extra_attributes():
     assert property.size == 0
     assert property.osid == ""
     assert property.age_updated_date == ""
+    
+    
+def test_handle_year_string_with_year_as_None():
+    property.year = "None"
+    property.handle_year_string()
+    assert property.year == 1959
+    
+

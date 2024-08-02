@@ -44,3 +44,9 @@ class Property():
         year_is_int = type(self.year) is int
         if not year_is_int:
             self.year = int(self.year[-4:])
+            
+            
+    
+    #metric 
+    #year //DONE
+    #connectivity 
