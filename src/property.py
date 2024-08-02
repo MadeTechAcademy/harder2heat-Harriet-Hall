@@ -2,20 +2,21 @@ MINIMUM_EPC_RATING = "C"
 MINIMUM_FAILING_YEAR = 1959
 CONNECTIVITY_VALUES = {
     "Standalone": "Free-Standing",
-    "Semi-Connected" : "Dual-Connected",
-    "End-Connected" : "Single-Connected"  
+    "Semi-Connected": "Dual-Connected",
+    "End-Connected": "Single-Connected",
 }
 WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
 
-class Property():
+
+class Property:
     def __init__(self, uprn):
         self.uprn = uprn
-        self.epc_rating = ''
-        self.epc_score = ''
-        self.address = ''
+        self.epc_rating = ""
+        self.epc_score = ""
+        self.address = ""
         self.year = 0
-        self.connectivity = ''
-        self.material = ''
+        self.connectivity = ""
+        self.material = ""
         self.score = 0
         self.void = False
         self.long = 0
@@ -24,9 +25,7 @@ class Property():
         self.size = 0
         self.osid = ""
         self.age_updated_date = ""
-        
-        
-        
+
     def calculate_score(self):
         score = 0
         self.handle_year_string()
@@ -41,20 +40,18 @@ class Property():
 
         self.score = score
         return score
-    
+
     def handle_year_string(self):
         if self.year == "None":
             self.year = MINIMUM_FAILING_YEAR
         year_is_int = type(self.year) is int
         if not year_is_int:
             self.year = int(self.year[-4:])
-            
+
     def handle_connectivity(self):
-       if self.connectivity == "Standalone":
-           self.connectivity = CONNECTIVITY_VALUES["Standalone"]
-       elif self.connectivity == "Semi-Connected":
-           self.connectivity = CONNECTIVITY_VALUES["Semi-Connected"]
-            
-            
-        
-        
+        if self.connectivity == "Standalone":
+            self.connectivity = CONNECTIVITY_VALUES["Standalone"]
+        elif self.connectivity == "Semi-Connected":
+            self.connectivity = CONNECTIVITY_VALUES["Semi-Connected"]
+        else:
+            self.connectivity = CONNECTIVITY_VALUES["End-Connected"]

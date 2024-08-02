@@ -48,3 +48,8 @@ def test_handle_connectivity_with_semi_connected():
     property.connectivity = "Semi-Connected"
     property.handle_connectivity() 
     assert property.connectivity == "Dual-Connected"
+
+def test_handle_connectivity_with_end_connected():
+    property.connectivity = "End-Connected"
+    property.handle_connectivity() 
+    assert property.connectivity == "Single-Connected"
