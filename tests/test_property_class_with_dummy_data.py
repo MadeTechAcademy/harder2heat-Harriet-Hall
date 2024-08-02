@@ -65,3 +65,10 @@ def test_handle_year_string_with_buildingage_year_is_period(dummy_property):
     dummy_property.year = dummy_data_properties["buildingage_period"]
     dummy_property.handle_year_string()
     assert dummy_property.year == 1989
+
+     
+def test_handle_connectivity_with_semi_connected(dummy_property):
+    dummy_property.connectivity = dummy_data_properties["connectivity"]
+    dummy_property.handle_connectivity()
+    assert dummy_property.connectivity == "Dual-Connected"
+    
