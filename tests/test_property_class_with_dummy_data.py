@@ -52,6 +52,7 @@ def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
  
 def test_handle_year_string_with_buildingage_year_as_None(dummy_property):
     dummy_property.year = dummy_data_property["buildingage_year"]
+    assert dummy_property.year == "None"
     dummy_property.handle_year_string()
     assert dummy_property.year == 1959
 
@@ -63,11 +64,15 @@ def test_handle_year_string_with_buildingage_year(dummy_property):
     
 def test_handle_year_string_with_buildingage_year_is_period(dummy_property):
     dummy_property.year = dummy_data_property["buildingage_period"]
+    assert dummy_property.year == "1980-1989"
     dummy_property.handle_year_string()
     assert dummy_property.year == 1989
 
      
 def test_handle_connectivity_with_semi_connected(dummy_property):
     dummy_property.connectivity = dummy_data_property["connectivity"]
+    assert dummy_property.connectivity == "Semi-Connected"
     dummy_property.handle_connectivity()
     assert dummy_property.connectivity == "Dual-Connected"
+
+
