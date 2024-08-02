@@ -19,8 +19,6 @@ def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
     dummy_property.material = dummy_data_property["constructionmaterial"]
     coordinates_list = dummy_data[0]["geometry"]["coordinates"][0]
     dummy_property.coordinates = coordinates_list
-    dummy_property.long = coordinates_list[0][0]
-    dummy_property.lat = coordinates_list[0][1]
     dummy_property.size = dummy_data_property["geometry_area_m2"]
     dummy_property.osid = dummy_data_property["osid"]
     dummy_property.age_updated_date = dummy_data_property["buildingage_updatedate"]

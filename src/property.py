@@ -18,9 +18,6 @@ class Property:
         self.connectivity = ""
         self.material = ""
         self.score = 0
-        self.void = False
-        self.long = 0
-        self.lat = 0
         self.coordinates = []
         self.size = 0
         self.osid = ""

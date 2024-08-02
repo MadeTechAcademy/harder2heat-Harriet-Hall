@@ -11,9 +11,6 @@ def test_property_has_correct_attributes():
     assert property.connectivity == ""
     assert property.material == ""
     assert property.score == 0
-    assert property.void == False
-    assert property.long == 0
-    assert property.lat == 0
 
 
 def test_property_has_extra_attributes():
