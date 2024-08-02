@@ -44,3 +44,7 @@ def test_handle_connectivity_with_standalone():
     property.handle_connectivity() 
     assert property.connectivity == "Free-Standing"
 
+def test_handle_connectivity_with_semi_connected():
+    property.connectivity = "Semi-Connected"
+    property.handle_connectivity() 
+    assert property.connectivity == "Dual-Connected"

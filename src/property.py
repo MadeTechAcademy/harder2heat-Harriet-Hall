@@ -52,7 +52,9 @@ class Property():
     def handle_connectivity(self):
        if self.connectivity == "Standalone":
            self.connectivity = CONNECTIVITY_VALUES["Standalone"]
-   
+       elif self.connectivity == "Semi-Connected":
+           self.connectivity = CONNECTIVITY_VALUES["Semi-Connected"]
+            
             
         
         
