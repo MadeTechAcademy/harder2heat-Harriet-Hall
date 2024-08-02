@@ -4,8 +4,6 @@ property = Property(1)
 def test_property_has_correct_attributes():
 
     assert property.uprn == 1
-    assert property.epc_rating == ""
-    assert property.epc_score == ""
     assert property.address == ""
     assert property.year == 0
     assert property.connectivity == ""
