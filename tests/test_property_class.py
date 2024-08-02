@@ -48,3 +48,12 @@ def test_handle_connectivity_with_end_connected():
     property.connectivity = "End-Connected"
     property.handle_connectivity() 
     assert property.connectivity == "Single-Connected"
+    
+def test_calculate_score_returns_correct_score():
+    property.connectivity = "Standalone"
+    property.material = "not warm material"
+    property.year = "None"
+    score = property.calculate_score()
+    assert score == 3
+    
+    
