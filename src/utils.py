@@ -1,31 +1,25 @@
 from src.property import Property
 
-def get_properties_from_os(list_of_buildings):
-    list_of_properties = []
-    for i in range(len(list_of_buildings)):
-        coordinates = list_of_buildings[i]["geometry"]["coordinates"][0][0]
-        building = list_of_buildings[i]["properties"]
-        uprn_array = building["uprnreference"]
-        for j in range(len(uprn_array)):
-            year = (
-                "buildingage_year"
-                if building["buildingage_year"]
-                else "buildingage_period"
-            )
-            new_prop = Property(uprn_array[j]["uprn"])
-            new_prop.connectivity = building["connectivity"]
-            new_prop.year = building[year]
-            new_prop.material = building["constructionmaterial"]
-            new_prop.long = coordinates[0]
-            new_prop.lat = coordinates[1]
-            list_of_properties.append(new_prop)
 
-    return list_of_properties
+def generate_property_class_list(list_of_properties):
+    result_properties_list = []
 
-            
+    for property_i in list_of_properties:
+        property = property_i["properties"]
+        year = (
+            property["buildingage_year"]
+            if property["buildingage_year"] != "None"
+            else "buildingage_period"
+        )
+        new_property = Property(property["uprnreference"][0]["uprn"])
+        new_property.coordinates = property_i["geometry"]["coordinates"][0]
+        new_property.connectivity = property["connectivity"]
+        new_property.year = property[year]
+        new_property.material = property["constructionmaterial"]
+        new_property.age_updated_date = property["buildingage_updatedate"]
+        new_property.size = property["geometry_area_m2"]
+        new_property.osid = property["osid"]
 
+        result_properties_list.append(new_property)
 
-
-
-
-
+    return result_properties_list

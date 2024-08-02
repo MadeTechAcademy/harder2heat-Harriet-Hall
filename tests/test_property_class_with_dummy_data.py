@@ -2,7 +2,7 @@ from src.property import Property
 import pytest
 import json
 
-with open("../properties.json", "r") as data:
+with open("./properties.json", "r") as data:
     dummy_data = json.load(data)
     dummy_data_properties = dummy_data[0]["properties"]
  
@@ -44,8 +44,7 @@ def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
         [0.0452889, 52.4569136],
     ]
  
-    assert dummy_property.long == 0.0452889
-    assert dummy_property.lat == 52.4569136
+
     assert dummy_property.age_updated_date == "2024-05-20"
     assert dummy_property.size == 111.601
     assert dummy_property.osid == "02ae4ae4-6119-4d72-aef9-e56013d25e0d"
