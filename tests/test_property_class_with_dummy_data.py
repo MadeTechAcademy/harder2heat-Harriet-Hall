@@ -9,19 +9,28 @@ with open("./properties.json", "r") as data:
 
 @pytest.fixture
 def dummy_property():
-    property = Property(dummy_data_property["uprnreference"][0]["uprn"])
+    uprn = dummy_data_property["uprnreference"][0]["uprn"]
+    year = dummy_data_property["buildingage_year"]
+    connectivity = dummy_data_property["connectivity"]
+    material = dummy_data_property["constructionmaterial"]
+    coordinates = dummy_data[0]["geometry"]["coordinates"][0]
+    size = dummy_data_property["geometry_area_m2"]
+    osid = dummy_data_property["osid"]
+    age_updated_date = dummy_data_property["buildingage_updatedate"]
+    property = Property(
+        uprn,
+        year,
+        connectivity,
+        material,
+        coordinates,
+        size,
+        osid,
+        age_updated_date,
+    )
     yield property
 
 
 def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
-    dummy_property.connectivity = dummy_data_property["connectivity"]
-    dummy_property.year = dummy_data_property["buildingage_year"]
-    dummy_property.material = dummy_data_property["constructionmaterial"]
-    coordinates_list = dummy_data[0]["geometry"]["coordinates"][0]
-    dummy_property.coordinates = coordinates_list
-    dummy_property.size = dummy_data_property["geometry_area_m2"]
-    dummy_property.osid = dummy_data_property["osid"]
-    dummy_property.age_updated_date = dummy_data_property["buildingage_updatedate"]
 
     assert dummy_property.uprn == 100090062842
     assert dummy_property.year == "None"
@@ -75,15 +84,16 @@ def test_handle_connectivity_with_semi_connected(dummy_property):
 
 dummy_end_connected = dummy_data[1]["properties"]
 
-
 @pytest.fixture
 def dummy_property_1():
-    property = Property(dummy_end_connected["uprnreference"][0]["uprn"])
+    uprn = dummy_end_connected["uprnreference"][0]["uprn"]
+    connectivity = dummy_data[1]["properties"]["connectivity"]
+    property = Property(uprn, 0, connectivity, "", [], "", "", "")
     yield property
 
 
 def test_handle_connectivity_with_end_connected(dummy_property_1):
-    dummy_property_1.connectivity = dummy_data[1]["properties"]["connectivity"]
+   
     assert dummy_property_1.connectivity == "End-Connected"
     dummy_property_1.handle_connectivity()
     assert dummy_property_1.connectivity == "Single-Connected"
@@ -94,12 +104,13 @@ dummy_standalone = dummy_data[2]["properties"]
 
 @pytest.fixture
 def dummy_property_2():
-    property = Property(dummy_standalone["uprnreference"][0]["uprn"])
+    uprn = dummy_standalone["uprnreference"][0]["uprn"]
+    connectivity = dummy_standalone["connectivity"]
+    property = Property(uprn, 0, connectivity, "", [], "", "", "")
     yield property
 
 
 def test_handle_connectivity_with_standalone(dummy_property_2):
-    dummy_property_2.connectivity = dummy_standalone["connectivity"]
     assert dummy_property_2.connectivity == "Standalone"
     dummy_property_2.handle_connectivity()
     assert dummy_property_2.connectivity == "Free-Standing"
