@@ -1,12 +1,11 @@
 from src.property import Property
 
-property = Property(1)
+property = Property(1, 0, "", "", [], 0, "", "")
 
 
 def test_property_has_correct_attributes():
 
     assert property.uprn == 1
-    assert property.address == ""
     assert property.year == 0
     assert property.connectivity == ""
     assert property.material == ""

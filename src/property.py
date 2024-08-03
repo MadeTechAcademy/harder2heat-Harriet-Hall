@@ -8,17 +8,26 @@ WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
 
 
 class Property:
-    def __init__(self, uprn):
+    def __init__(
+        self,
+        uprn,
+        year,
+        connectivity,
+        material,
+        coordinates,
+        size,
+        osid,
+        age_updated_date,
+    ):
         self.uprn = uprn
-        self.address = ""
-        self.year = 0
-        self.connectivity = ""
-        self.material = ""
+        self.year = year
+        self.connectivity = connectivity
+        self.material = material
+        self.coordinates = coordinates
+        self.size = size
+        self.osid = osid
+        self.age_updated_date = age_updated_date
         self.score = 0
-        self.coordinates = []
-        self.size = 0
-        self.osid = ""
-        self.age_updated_date = ""
 
     def calculate_score(self):
         score = 0
