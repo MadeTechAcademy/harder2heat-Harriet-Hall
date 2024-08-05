@@ -13,8 +13,8 @@ class Council:
             property = property_i["properties"]
 
             year = (
-                property["buildingage_year"]
-                if property["buildingage_year"] != "None"
+                "buildingage_year"
+                if "buildingage_year" != "None"
                 else "buildingage_period"
             )
             urpn = property["uprnreference"][0]["uprn"]
