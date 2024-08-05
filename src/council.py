@@ -12,13 +12,13 @@ class Council:
 
             property = property_i["properties"]
 
-            year = (
-                "buildingage_year"
-                if "buildingage_year" != "None"
-                else "buildingage_period"
+            year_or_period = (
+                property["buildingage_year"]
+                if type( property["buildingage_year"]) is int
+                else  property["buildingage_period"]
             )
             urpn = property["uprnreference"][0]["uprn"]
-            year = property[year]
+            year = year_or_period
             connectivity = property["connectivity"]
             material = property["constructionmaterial"]
             coordinates = property_i["geometry"]["coordinates"][0]
