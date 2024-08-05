@@ -55,4 +55,9 @@ def test_get_hardest_to_heat_properties_updates_property_score():
     assert property_1.score == 0
     assert property_2.score == 1
   
+def test_get_hardest_to_heat_properties_sorts_list_of_properties_descenting():
+    council.list_of_properties = [property_1, property_2]
+    council.get_hardest_to_heat_properties()
     
+    assert council.list_of_properties[0].score == 1    
+    assert council.list_of_properties[1].score == 0

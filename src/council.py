@@ -42,5 +42,5 @@ class Council:
     def get_hardest_to_heat_properties(self):
         for property in self.list_of_properties:
             property.calculate_score()
-
+        self.list_of_properties.sort(reverse=True, key= lambda property: property.score)
         
