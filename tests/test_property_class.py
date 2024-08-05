@@ -60,8 +60,8 @@ def test_calculate_score_with_hard_to_heat_attributes():
     property.connectivity = "Standalone"
     property.material = "not warm material"
     property.year = "None"
-    score = property.calculate_score()
-    assert score == 3
+    property.calculate_score()
+    assert property.score == 3
 
 
 def test_calculate_score_with_non_hard_to_heat_attributes():
@@ -69,13 +69,13 @@ def test_calculate_score_with_non_hard_to_heat_attributes():
     property.connectivity = "End-Connected"
     property.material = "Contrete"
     property.year = 2000
-    score = property.calculate_score()
-    assert score == 0
+    property.calculate_score()
+    assert property.score == 0
 
 def test_calculate_score_with_combination_of_attributes():
     
     property.connectivity = "Standalone"
     property.material = ""
     property.year = "2000-2009"
-    score = property.calculate_score()
-    assert score == 1
+    property.calculate_score()
+    assert property.score == 1
