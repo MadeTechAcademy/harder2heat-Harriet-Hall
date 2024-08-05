@@ -1,11 +1,10 @@
-from src.utils import generate_property_class_list
 from src.property import Property
-
 
 class Council:
     def __init__(self, name):
         self.name = name
         self.list_of_properties = []
+
 
 
     def generate_property_class_list(self, properties_data):
@@ -40,3 +39,8 @@ class Council:
             self.list_of_properties.append(new_property)
 
 
+    def get_hardest_to_heat_properties(self):
+        for property in self.list_of_properties:
+            property.calculate_score()
+
+        

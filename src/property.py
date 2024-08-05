@@ -41,7 +41,7 @@ class Property:
             score += 1
 
         self.score = score
-        return score
+    
 
     def handle_year_string(self):
         if self.year == "None":

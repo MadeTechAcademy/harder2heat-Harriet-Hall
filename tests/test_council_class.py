@@ -42,3 +42,17 @@ def test_generate_property_class_list_updates_list_of_properties():
     assert property.age_updated_date == "2024-05-20"
     assert property.size == 111.601
     assert property.osid == "02ae4ae4-6119-4d72-aef9-e56013d25e0d"
+
+
+    
+property_1 = Property(1, 2000, "", "", [], 0, "", "")
+property_2 = Property(1, 1900, "", "", [], 0, "", "")
+
+def test_get_hardest_to_heat_properties_updates_property_score():
+    council.list_of_properties = [property_1, property_2]
+    council.get_hardest_to_heat_properties()
+    
+    assert property_1.score == 0
+    assert property_2.score == 1
+  
+    
