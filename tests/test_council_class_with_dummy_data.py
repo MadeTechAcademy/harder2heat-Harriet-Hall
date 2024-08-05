@@ -35,3 +35,14 @@ def test_generate_property_class_list_updates_list_of_properties_with_dummy_data
     assert property.size == 111.601
     assert property.osid == "02ae4ae4-6119-4d72-aef9-e56013d25e0d"
 
+
+def test_get_hardest_to_heat_properties_updates_property_score():
+
+    for property in council.list_of_properties:
+        assert property.score == 0
+        
+    council.get_hardest_to_heat_properties()
+    scores = []
+    for property in council.list_of_properties:
+            scores.append(property.score)
+    assert scores == [2, 0, 0, 0] 
