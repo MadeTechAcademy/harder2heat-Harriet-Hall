@@ -1,6 +1,6 @@
 import json
 from flask import Flask, render_template
-from src.utils import generate_property_class_list
+from src.council import generate_property_class_list
 app = Flask(__name__)
 
 properties = None
