@@ -2,7 +2,7 @@ from src.council import Council
 from src.property import Property
 
 
-council = Council("council_1")
+council = Council("council_1", "UK")
 data = (
     {
         "geometry": {
@@ -33,7 +33,7 @@ data = (
 
 def test_council_class_has_name_attribute():
     assert council.name == "council_1"
-
+    assert council.country == "UK"
 
 def test_council_class_has_list_of_properties():
     assert type(council.list_of_properties) is list
