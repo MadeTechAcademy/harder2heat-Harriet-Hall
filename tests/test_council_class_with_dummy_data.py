@@ -5,15 +5,14 @@ from src.property import Property
 
 with open("./properties.json", "r") as data:
     dummy_data = json.load(data)
-    council = Council("name")
+    council = Council("name", "UK")
     
-
 
 def test_generate_property_class_list_updates_list_of_properties_with_dummy_data():
     council.generate_property_class_list(dummy_data)
 
     property = council.list_of_properties[0]
-    assert type(council.list_of_properties[0]) is Property
+    assert isinstance(council.list_of_properties[0], Property)
     assert property.uprn == 100090062842
     assert property.year == "1980-1989"
     assert property.connectivity == "Semi-Connected"
