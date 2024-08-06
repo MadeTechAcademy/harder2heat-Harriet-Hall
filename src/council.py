@@ -1,5 +1,5 @@
-from property import Property
-from french_property import FrenchProperty
+from .property import Property
+from .french_property import FrenchProperty
 
 
 class Council:
