@@ -19,6 +19,15 @@ class TestClient(unittest.TestCase):
         self.assertTrue(status)
         self.assertEqual(body["status"], "ok")
 
+    @patch("client.requests")
+    def test_get_council_properties_from_api_returns_500(self, mock_requests):
+
+        mock_response = MagicMock()
+        mock_response.status_code = 500
+        mock_requests.get.return_value = mock_response
+
+        status, body = get_council_properties_from_api(self.url)
+        self.assertFalse(status)
 
 
 unittest.main()
