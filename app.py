@@ -1,12 +1,13 @@
 import json
 from flask import Flask, render_template
-from src.council import generate_property_class_list
+from src.council import Council
 app = Flask(__name__)
 
 properties = None
 with open('properties.json') as json_properties:
    data = json.load(json_properties)
-   properties = generate_property_class_list(data)
+   council = Council("any", "UK")
+   properties = council.generate_property_class_list(data)
 
 @app.route("/")
 def home():
