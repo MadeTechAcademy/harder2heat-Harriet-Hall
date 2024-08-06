@@ -75,5 +75,21 @@ class TestClient(unittest.TestCase):
         self.assertEqual(body["data"][0]["properties"]["number_of_floors"], 2)
         self.assertEqual(body["data"][0]["properties"]["distance_to_public_transport_meters"], 19)
     
+    @patch("client.requests")
+    def test_property_class_with_api_response_data(self, mock_requests):
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = self.mock_data
+        mock_requests.get.return_value = mock_response
+
+        body = get_council_properties_from_api(self.url)
+  
+        council = Council("council_1", "France")
+        council.generate_property_class_list(body[1]["data"])
+        self.assertEqual(council.list_of_properties[0].floors, 2)
+        self.assertEqual(council.list_of_properties[0].distance_to_transport, 19)
+        
+
 
 unittest.main()
