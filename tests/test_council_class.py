@@ -48,9 +48,10 @@ def test_council_class_has_list_of_properties(uk_council):
 
 def test_generate_property_class_list_updates_list_of_properties(uk_council):
     uk_council.generate_property_class_list(data)
-    assert isinstance(uk_council.list_of_properties[0], Property) 
-
     property = uk_council.list_of_properties[0]
+    assert isinstance(property, Property) 
+
+    
     assert property.uprn == 1
     assert property.year == 1988
     assert property.connectivity == "Semi-Connected"
