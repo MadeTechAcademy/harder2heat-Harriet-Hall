@@ -39,7 +39,7 @@ class Council:
                     osid,
                     age_updated_date,
                 )
-            else:
+            elif self.country == "France":
                 floors = property["number_of_floors"]
                 distance_to_transport = property["distance_to_public_transport_meters"]
 

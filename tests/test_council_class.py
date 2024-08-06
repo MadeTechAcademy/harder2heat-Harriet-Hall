@@ -82,3 +82,28 @@ def test_get_hardest_to_heat_properties_sorts_list_of_properties_descenting(uk_c
     assert uk_council.list_of_properties[0].score == 1
     assert uk_council.list_of_properties[1].score == 0
 
+@pytest.fixture
+def french_council():
+    french_council = Council("council_1", "France")
+    yield french_council 
+
+
+def test_generate_property_class_list_when_country_is_France(french_council):
+    french_council.generate_property_class_list(data)
+    assert isinstance(french_council.list_of_properties[0], FrenchProperty)
+    french_property = french_council.list_of_properties[0]
+    
+    assert french_property.uprn == 1
+    assert french_property.year == 1988
+    assert french_property.connectivity == "Semi-Connected"
+    assert french_property.material == "Brick Or Block Or Stone"
+    assert french_property.coordinates == [
+        [0.0452889, 52.4569136],
+        [0.0453246, 52.4569215],
+    ]
+    assert french_property.age_updated_date == "2024-05-20"
+    assert french_property.size == 11
+    assert french_property.osid == "123"
+    assert french_property.floors == 2
+    assert french_property.distance_to_transport == 10
+
