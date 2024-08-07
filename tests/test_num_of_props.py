@@ -73,3 +73,10 @@ def test_displays_table_property_data(browser):
         "1",
     ]
     
+
+def test_displays_multiple_properties(browser):
+    table = browser.find_element(By.ID, "properties-table")
+    rows = table.find_elements(By.TAG_NAME, "tr")
+
+    assert len(rows) > 2
+
