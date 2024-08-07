@@ -57,7 +57,7 @@ class Council:
                 )
 
             self.list_of_properties.append(new_property)
-            self.get_hardest_to_heat_properties()
+            
 
     def get_hardest_to_heat_properties(self):
         for property in self.list_of_properties:
