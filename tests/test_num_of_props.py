@@ -2,18 +2,13 @@ import pytest
 import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service as ChromeService
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 @pytest.fixture()
 def chrome_browser():
     driver = webdriver.Chrome()
-
     driver.implicitly_wait(10)
-
     yield driver
-
     driver.quit()
 
 
@@ -30,4 +25,18 @@ def test_displays_main_title(chrome_browser):
     chrome_browser.get("http://127.0.0.1:5000")
     h1_tag = chrome_browser.find_element(By.TAG_NAME, "h1")
     assert h1_tag.text == "Hard to Heat Homes"
+
+def test_displays_table_with_propery_features_as_headers(chrome_browser):
+    chrome_browser.get("http://127.0.0.1:5000")
+    table = chrome_browser.find_element(By.ID, "properties-table")
+    headers = table.find_elements(By.TAG_NAME, "th")
+   
+    assert len(headers) == 9
+    list_of_headers = []
     
+    for header in headers:
+        text = header.text
+        list_of_headers.append(text)   
+            
+    assert list_of_headers == ["UPRN", "OSID", "Year Built", "Updated on", "Connectivity", "Building materials", "Size in m2","Coordinates", "Score" ]
+
