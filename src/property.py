@@ -1,8 +1,8 @@
 MINIMUM_FAILING_YEAR = 1959
 CONNECTIVITY_VALUES = {
     "Standalone": "Free-Standing",
-    "Semi-Connected": "Dual-Connected",
-    "End-Connected": "Single-Connected",
+    "Semi-Connected": "Single-Connected",
+    "End-Connected": "Dual-Connected",
 }
 WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
 

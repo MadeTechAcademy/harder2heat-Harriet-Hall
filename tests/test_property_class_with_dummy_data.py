@@ -79,7 +79,7 @@ def test_handle_connectivity_with_semi_connected(dummy_property):
     dummy_property.connectivity = dummy_data_property["connectivity"]
     assert dummy_property.connectivity == "Semi-Connected"
     dummy_property.handle_connectivity()
-    assert dummy_property.connectivity == "Dual-Connected"
+    assert dummy_property.connectivity == "Single-Connected"
 
 
 dummy_end_connected = dummy_data[1]["properties"]
@@ -96,7 +96,7 @@ def test_handle_connectivity_with_end_connected(dummy_property_1):
    
     assert dummy_property_1.connectivity == "End-Connected"
     dummy_property_1.handle_connectivity()
-    assert dummy_property_1.connectivity == "Single-Connected"
+    assert dummy_property_1.connectivity == "Dual-Connected"
 
 
 dummy_standalone = dummy_data[2]["properties"]
