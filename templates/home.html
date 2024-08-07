@@ -9,19 +9,32 @@
     <h1>Hard to Heat Homes</h1>
     <table id="properties-table">
       <thead>
-        <tr>
-          <th>UPRN</th>
-          <th>OSID</th>
-          <th>Year Built</th>
-          <th>Updated on</th>
-          <th>Connectivity</th>
-          <th>Building materials</th>
-          <th>Size in m2</th>
-          <th>Coordinates</th>
-          <th>Score</th>
-
+        <tr class="table_header_row">
+          <th class="table_header">UPRN</th class="table_header">
+          <th class="table_header">OSID</th class="table_header">
+          <th class="table_header">Year Built</th class="table_header">
+          <th class="table_header">Updated on</th class="table_header">
+          <th class="table_header">Connectivity</th class="table_header">
+          <th class="table_header">Building materials</th class="table_header">
+          <th class="table_header">Size in m2</th class="table_header">
+          <th class="table_header">Coordinates</th class="table_header">
+          <th class="table_header">Score</th class="table_header">
         </tr>
       </thead>
+      <tbody class="govuk-table__body">
+        {% for property in properties %}
+        <tr class="table_row">
+          <td class="table_cell">{{property.uprn}}</tb>
+          <td class="table_cell">{{property.osid}}</tb>
+          <td class="table_cell">{{property.year}}</tb>
+          <td class="table_cell">{{property.age_updated_date}}</tb>
+          <td class="table_cell">{{property.connectivity}}</tb>
+          <td class="table_cell">{{property.material}}</tb>
+          <td class="table_cell">{{property.size}}</tb>
+          <td class="table_cell">{{property.coordinates}}</tb>
+          <td class="table_cell">{{property.score}}</tb>
+           {% endfor %}
+        </tr>
     </table>
     <footer>Properties : 4</footer>
   </body>
