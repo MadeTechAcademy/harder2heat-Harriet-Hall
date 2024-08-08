@@ -1,4 +1,4 @@
-from .property import Property
+from src.property import Property
 
 class FrenchProperty(Property):
     def __init__(
