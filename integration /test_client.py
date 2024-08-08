@@ -3,8 +3,8 @@ from unittest.mock import patch, MagicMock
 from client import get_council_properties_from_api
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src')))
-from council import Council
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from src.council import Council
 
 
 class TestClient(unittest.TestCase):
@@ -60,6 +60,7 @@ class TestClient(unittest.TestCase):
 
         status, body = get_council_properties_from_api(self.url)
         self.assertFalse(status)
+        self.assertEqual(body, None)
 
     @patch("client.requests")
     def test_get_council_properties_from_api_returns_correct_data(self, mock_requests):
@@ -91,5 +92,5 @@ class TestClient(unittest.TestCase):
         self.assertEqual(council.list_of_properties[0].distance_to_transport, 19)
         
 
-
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
