@@ -1,6 +1,5 @@
 from src.council import Council
 from src.property import Property
-from mocking.french_property import FrenchProperty
 import pytest
 
 @pytest.fixture

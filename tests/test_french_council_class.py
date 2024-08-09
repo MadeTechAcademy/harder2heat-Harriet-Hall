@@ -1,6 +1,6 @@
 import pytest 
 from src.council import Council
-from .french_property import FrenchProperty
+from src.french_property import FrenchProperty
 
 data = (
     {

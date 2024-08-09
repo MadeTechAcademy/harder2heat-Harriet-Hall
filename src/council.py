@@ -1,5 +1,5 @@
 from .property import Property
-from mocking.french_property import FrenchProperty
+from .french_property import FrenchProperty
 
 
 class Council:

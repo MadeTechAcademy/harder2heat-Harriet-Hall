@@ -1,4 +1,4 @@
-from .french_property import FrenchProperty
+from src.french_property import FrenchProperty
 from src.property import Property
 
 french_property = FrenchProperty(1, 0, "", "", [], 0, "", "", 5, 19)
