@@ -12,4 +12,4 @@ with open('properties.json') as json_properties:
    
 @app.route("/")
 def home():
-   return render_template("home.html", properties=council.list_of_properties)
+   return render_template("base.html", properties=council.list_of_properties)
