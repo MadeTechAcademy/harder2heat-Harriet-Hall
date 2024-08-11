@@ -13,3 +13,7 @@ def browser():
 
 def test_title(browser):
     assert browser.title == "Harder to Heat Homes"  
+
+def test_base_page_has_correct_gov_uk_content(browser):
+    assert browser.find_element(By.CLASS_NAME, "govuk-header__logotype").text == "GOV.UK"
+    assert browser.find_element(By.CLASS_NAME, "govuk-footer__licence-description").text == "All content is available under the Open Government Licence v3.0, except where otherwise stated"
