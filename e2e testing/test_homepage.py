@@ -14,7 +14,7 @@ def browser():
 
 
 def test_displays_num_of_properties(browser):
-  
+
     footer_tag = browser.find_element(By.TAG_NAME, "footer")
     regex_find_num_of_properties = re.search(r"\d+", footer_tag.text)
     number_of_properties = int(regex_find_num_of_properties.group())
@@ -31,7 +31,7 @@ def test_displays_main_title(browser):
 def test_displays_table_with_propery_features_as_headers(browser):
     table = browser.find_element(By.ID, "data")
     headers = table.find_elements(By.TAG_NAME, "th")
-
+    
     assert len(headers) == 10
     list_of_headers = []
 
@@ -87,3 +87,13 @@ def test_displays_see_more_details_button(browser):
 
     assert button.text == "See more details"
     assert button.get_attribute("style") == "color: black; text-decoration: none;"
+
+def test_button_navigates_to_property_page_with_uprn(browser):
+    table = browser.find_element(By.ID, "data")
+    button = table.find_element(By.TAG_NAME, "a")
+    url = button.get_attribute("href")
+    assert browser.current_url != url
+    
+    button.click()
+    
+    assert browser.current_url == url
