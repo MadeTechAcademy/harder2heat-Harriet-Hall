@@ -14,7 +14,7 @@ def browser():
 
 
 def test_displays_num_of_properties(browser):
-
+  
     footer_tag = browser.find_element(By.TAG_NAME, "footer")
     regex_find_num_of_properties = re.search(r"\d+", footer_tag.text)
     number_of_properties = int(regex_find_num_of_properties.group())
@@ -29,7 +29,6 @@ def test_displays_main_title(browser):
 
 
 def test_displays_table_with_propery_features_as_headers(browser):
-
     table = browser.find_element(By.ID, "data")
     headers = table.find_elements(By.TAG_NAME, "th")
 
@@ -49,10 +48,8 @@ def test_displays_table_with_propery_features_as_headers(browser):
         "Building materials",
         "Size in m2",
         "Coordinates",
-        'Hard To Heat Score:\n'
-        '(easy) 0 - 4 (hard)',
-        ''
-        
+        "Hard To Heat Score:\n" "(easy) 0 - 4 (hard)",
+        "",
     ]
 
 
@@ -75,11 +72,18 @@ def test_displays_table_property_data(browser):
         "[[0.0471489, 52.4569721], [0.0472922, 52.4569964], [0.0473205, 52.4569337], [0.0473576, 52.45694], [0.0473707, 52.4569112], [0.0473336, 52.4569049], [0.0473464, 52.4568765], [0.0472657, 52.4568629], [0.0472642, 52.4568662], [0.0472467, 52.4568633], [0.0472399, 52.4568621], [0.0472175, 52.4569117], [0.0472229, 52.4569126], [0.0472151, 52.4569296], [0.0472085, 52.456944], [0.047165, 52.4569366], [0.0471489, 52.4569721]]",
         "2",
     ]
-    
+
 
 def test_displays_multiple_properties(browser):
     table = browser.find_element(By.ID, "data")
     rows = table.find_elements(By.TAG_NAME, "tr")
 
     assert len(rows) > 2
-    
+
+
+def test_displays_see_more_details_button(browser):
+    table = browser.find_element(By.ID, "data")
+    button = table.find_element(By.TAG_NAME, "a")
+
+    assert button.text == "See more details"
+    assert button.get_attribute("style") == "color: black; text-decoration: none;"
