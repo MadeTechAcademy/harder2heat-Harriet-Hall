@@ -1,41 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome</title>
-  </head>
-  <body>
-    <h1>Hard to Heat Homes</h1>
-    <table id="properties-table">
-      <thead>
-        <tr class="table_header_row">
-          <th class="table_header">UPRN</th>
-          <th class="table_header">OSID</th>
-          <th class="table_header">Year Built</th>
-          <th class="table_header">Updated on</th>
-          <th class="table_header">Connectivity</th>
-          <th class="table_header">Building materials</th>
-          <th class="table_header">Size in m2</th>
-          <th class="table_header">Coordinates</th>
-          <th class="table_header">Score</th>
+{% extends "base.html" %} {% block content %}
+
+<div class="govuk-grid-row">
+  <div>
+    <h1 class="govuk-heading-l">Hard to Heat Homes</h1>
+    <table class="govuk-table govuk-table--small-text-until-tablet" id="data">
+      <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+          <th scope="col" class="govuk-table__header no-sort">UPRN</th>
+          <th scope="col" class="govuk-table__header no-sort">OSID</th>
+          <th scope="col" class="govuk-table__header no-sort">Year Built</th>
+          <th scope="col" class="govuk-table__header no-sort">Updated on</th>
+          <th scope="col" class="govuk-table__header no-sort">Connectivity</th>
+          <th scope="col" class="govuk-table__header no-sort">
+            Building materials
+          </th>
+          <th scope="col" class="govuk-table__header no-sort">Size in m2</th>
+          <th scope="col" class="govuk-table__header no-sort">Coordinates</th>
+          <th scope="col" class="govuk-table__header" title="Low 0-4 High">
+            Hard To Heat Score: <br>(easy) 0  - 4 (hard)</th>
+
+          <th scope="col" class="govuk-table__header no-sort"></th>
         </tr>
       </thead>
       <tbody class="govuk-table__body">
         {% for property in properties %}
-        <tr class="table_row">
-          <td class="table_cell">{{property.uprn}}</tb>
-          <td class="table_cell">{{property.osid}}</tb>
-          <td class="table_cell">{{property.year}}</tb>
-          <td class="table_cell">{{property.age_updated_date}}</tb>
-          <td class="table_cell">{{property.connectivity}}</tb>
-          <td class="table_cell">{{property.material}}</tb>
-          <td class="table_cell">{{property.size}}</tb>
-          <td class="table_cell">{{property.coordinates}}</tb>
-          <td class="table_cell">{{property.score}}</tb>
-           {% endfor %}
+        <tr class="govuk-table__row">
+          <td scope="row" class="govuk-table__cell">{{property.uprn}}</td>
+          <td scope="row" class="govuk-table__cell">{{property.osid}}</td>
+          <td scope="row" class="govuk-table__cell" style="text-align: center">
+            {{property.year}}
+          </td>
+          <td scope="row" class="govuk-table__cell" style="text-align: center">
+            {{property.age_updated_date}}
+          </td>
+          <td scope="row" class="govuk-table__cell">
+            {{property.connectivity}}
+          </td>
+          <td scope="row" class="govuk-table__cell">{{property.material}}</td>
+          <td scope="row" class="govuk-table__cell">{{property.size}}</td>
+          <td scope="row" class="govuk-table__cell">
+            {{property.coordinates}}
+          </td>
+          <td scope="row" class="govuk-table__cell">{{property.score}}</td>
+          <td score="row" class="govuk-table__cell" >
+          </td>  
+          <td score="row" class="govuk-table__cell"></td>
         </tr>
+        {% endfor %}
+      </tbody>
     </table>
-    <footer>Properties : 4</footer>
-  </body>
-</html>
+<footer class="govuk-footer">Properties : 4</footer>
+    {% endblock %}
+  </div>
+</div>
