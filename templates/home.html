@@ -42,9 +42,10 @@
             {{property.coordinates}}
           </td>
           <td scope="row" class="govuk-table__cell">{{property.score}}</td>
-          <td score="row" class="govuk-table__cell" >
+          <td scope="row" class="govuk-table__cell" >
+            <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="{{url_for('property', uprn=property.uprn)}}" style="color:black; text-decoration: none">See more details</a>
           </td>  
-          <td score="row" class="govuk-table__cell"></td>
+       
         </tr>
         {% endfor %}
       </tbody>
