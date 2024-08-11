@@ -30,10 +30,10 @@ def test_displays_main_title(browser):
 
 def test_displays_table_with_propery_features_as_headers(browser):
 
-    table = browser.find_element(By.ID, "properties-table")
+    table = browser.find_element(By.ID, "data")
     headers = table.find_elements(By.TAG_NAME, "th")
 
-    assert len(headers) == 9
+    assert len(headers) == 10
     list_of_headers = []
 
     for header in headers:
@@ -49,12 +49,15 @@ def test_displays_table_with_propery_features_as_headers(browser):
         "Building materials",
         "Size in m2",
         "Coordinates",
-        "Score",
+        'Hard To Heat Score:\n'
+        '(easy) 0 - 4 (hard)',
+        ''
+        
     ]
 
 
 def test_displays_table_property_data(browser):
-    table = browser.find_element(By.ID, "properties-table")
+    table = browser.find_element(By.ID, "data")
     cells = table.find_elements(By.TAG_NAME, "td")
     cell_data_list = []
     for cell in cells[0:9]:
@@ -75,8 +78,8 @@ def test_displays_table_property_data(browser):
     
 
 def test_displays_multiple_properties(browser):
-    table = browser.find_element(By.ID, "properties-table")
+    table = browser.find_element(By.ID, "data")
     rows = table.find_elements(By.TAG_NAME, "tr")
 
     assert len(rows) > 2
-
+    
