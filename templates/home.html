@@ -7,16 +7,14 @@
       <thead class="govuk-table__head">
         <tr class="govuk-table__row">
           <th scope="col" class="govuk-table__header no-sort">UPRN</th>
-          <th scope="col" class="govuk-table__header no-sort">OSID</th>
           <th scope="col" class="govuk-table__header no-sort">Year Built</th>
-          <th scope="col" class="govuk-table__header no-sort">Updated on</th>
           <th scope="col" class="govuk-table__header no-sort">Connectivity</th>
           <th scope="col" class="govuk-table__header no-sort">
             Building materials
           </th>
           <th scope="col" class="govuk-table__header no-sort">Size in m2</th>
           <th scope="col" class="govuk-table__header no-sort">Coordinates</th>
-          <th scope="col" class="govuk-table__header" title="Low 0-4 High">
+          <th scope="col" class="govuk-table__header" width="180">
             Hard To Heat Score: <br>(easy) 0  - 4 (hard)</th>
 
           <th scope="col" class="govuk-table__header no-sort"></th>
@@ -26,12 +24,8 @@
         {% for property in properties %}
         <tr class="govuk-table__row">
           <td scope="row" class="govuk-table__cell">{{property.uprn}}</td>
-          <td scope="row" class="govuk-table__cell">{{property.osid}}</td>
           <td scope="row" class="govuk-table__cell" style="text-align: center">
             {{property.year}}
-          </td>
-          <td scope="row" class="govuk-table__cell" style="text-align: center">
-            {{property.age_updated_date}}
           </td>
           <td scope="row" class="govuk-table__cell">
             {{property.connectivity}}
@@ -39,13 +33,12 @@
           <td scope="row" class="govuk-table__cell">{{property.material}}</td>
           <td scope="row" class="govuk-table__cell">{{property.size}}</td>
           <td scope="row" class="govuk-table__cell">
-            {{property.coordinates}}
+            {{property.coordinates[0]}}
           </td>
-          <td scope="row" class="govuk-table__cell">{{property.score}}</td>
+          <td scope="row" class="govuk-table__cell" style="text-align: center">{{property.score}}</td>
           <td scope="row" class="govuk-table__cell" >
             <a class="govuk-button govuk-button--secondary" data-module="govuk-button" href="{{url_for('property', uprn=property.uprn)}}" style="color:black; text-decoration: none">See more details</a>
           </td>  
-       
         </tr>
         {% endfor %}
       </tbody>
