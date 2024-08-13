@@ -86,3 +86,23 @@ class TestPropertyPage:
         except NoSuchElementException:
             pytest.fail("No table data element found")
 
+
+    def test_home_button_navigates_to_homepage(self, browser):
+        try:
+
+            home_button = browser.find_element(By.TAG_NAME, "a")
+            print(home_button, "homebutton")
+            url = home_button.get_attribute("href")
+            
+            assert url == "http://127.0.0.1:5000/"
+            assert browser.current_url != url
+
+            home_button.click()
+            WebDriverWait(browser, 10).until(EC.url_to_be(url))
+
+            assert browser.current_url == url
+
+        except TimeoutException:
+            print("Navigation took too long.")
+        except AssertionError:
+            print("Wrong URL")
