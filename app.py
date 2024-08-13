@@ -19,6 +19,6 @@ def property(uprn):
     property = None
     for property_i in council.list_of_properties:
         if property_i.uprn == uprn:
-            property = property 
+            property = property_i
 
     return render_template("property.html", property=property)
