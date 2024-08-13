@@ -15,31 +15,41 @@
           <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">OSID:</th>
+              <td class="govuk-table__cell">{{property.osid}}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Year Built:</th>
+              <td class="govuk-table__cell">{{property.year}}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Updated on:</th>
+              <td class="govuk-table__cell">{{property.age_updated_date}}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Connectivity:</th>
+              <td class="govuk-table__cell">{{property.connectivity}}</td>
             </tr>
             <tr class="govuk-table__row">
-              <th scope="row" class="govuk-table__header">Building materials:</th>
+              <th scope="row" class="govuk-table__header">
+                Building materials:
+              </th>
+              <td class="govuk-table__cell">{{property.material}}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Size in m2:</th>
+              <td class="govuk-table__cell">{{property.size}}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">Coordinates:</th>
+              <td class="govuk-table__cell">{{property.coordinates}}</td>
             </tr>
             <tr class="govuk-table__row">
               <th scope="row" class="govuk-table__header">
                 Hard To Heat Score:
                 <br />
-              (easy) 0 - 4 (hard)
+                (easy) 0 - 4 (hard)
               </th>
+              <td class="govuk-table__cell">{{property.score}}</td>
             </tr>
           </tbody>
         </table>
