@@ -63,4 +63,26 @@ class TestPropertyPage:
             pytest.fail("No table header element found")
 
 
+    def test_displays_table_property_data(self, browser):
+        try:
+            
+            table = self.get_table(browser)
+            cells = table.find_elements(By.TAG_NAME, "td")
+            cell_data_list = []
+            for cell in cells:
+                text = cell.text
+                cell_data_list.append(text)
+
+            assert cell_data_list == [
+                "0b1107e5-00f8-4d89-b6ae-67f0f98a6517",
+                "1918",
+                "2024-03-13",
+                "Free-Standing",
+                "Brick Or Block Or Stone",
+                "120.143",
+                "[[0.0471489, 52.4569721], [0.0472922, 52.4569964], [0.0473205, 52.4569337], [0.0473576, 52.45694], [0.0473707, 52.4569112], [0.0473336, 52.4569049], [0.0473464, 52.4568765], [0.0472657, 52.4568629], [0.0472642, 52.4568662], [0.0472467, 52.4568633], [0.0472399, 52.4568621], [0.0472175, 52.4569117], [0.0472229, 52.4569126], [0.0472151, 52.4569296], [0.0472085, 52.456944], [0.047165, 52.4569366], [0.0471489, 52.4569721]]",
+                "2",
+            ]
+        except NoSuchElementException:
+            pytest.fail("No table data element found")
 
