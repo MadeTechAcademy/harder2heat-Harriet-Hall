@@ -18,6 +18,13 @@ def browser():
 
 class TestPropertyPage:
 
+    def get_table(self, browser):
+        try:
+            return browser.find_element(By.CLASS_NAME, "govuk-table")
+        except NoSuchElementException:
+            pytest.fail("No table element found")
+            
+
     def test_page_header(self, browser):
         try:
             h2_tag = browser.find_element(By.TAG_NAME, "h2")
@@ -25,3 +32,35 @@ class TestPropertyPage:
 
         except NoSuchElementException:
             pytest.fail("No h1 element found")
+
+
+
+    def test_displays_table_with_propery_features_as_headers(self, browser):
+        try:
+                
+            table = self.get_table(browser)
+            headers = table.find_elements(By.TAG_NAME, "th")
+
+            assert len(headers) == 8
+            list_of_headers = []
+
+            for header in headers:
+                text = header.text
+                list_of_headers.append(text)
+
+            assert list_of_headers == [
+              
+                "OSID:",
+                "Year Built:",
+                "Updated on:",
+                "Connectivity:",
+                "Building materials:",
+                "Size in m2:",
+                "Coordinates:",
+                "Hard To Heat Score:\n(easy) 0 - 4 (hard)"
+            ]
+        except NoSuchElementException:
+            pytest.fail("No table header element found")
+
+
+
