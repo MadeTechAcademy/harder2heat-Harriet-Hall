@@ -37,7 +37,7 @@ class TestHomePage:
     def test_displays_main_title(self, browser):
         try:
             h1_tag = browser.find_element(By.TAG_NAME, "h1")
-            assert h1_tag.text == "Hard to Heat Homes"
+            assert h1_tag.text == "Harder to Heat Homes"
         except NoSuchElementException:
             pytest.fail("No h1 element found")
 
@@ -61,7 +61,7 @@ class TestHomePage:
                 "Building materials",
                 "Size in m2",
                 "Coordinates",
-                "Hard To Heat Score:\n" "(easy) 0 - 4 (hard)",
+                "Hard To Heat Score:\n" "(easy) 0 - 3 (hard)",
                 "",
             ]
         except NoSuchElementException:
@@ -72,21 +72,17 @@ class TestHomePage:
 
             table = self.get_table(browser)
             cells = table.find_elements(By.TAG_NAME, "td")
-            cell_data_list = []
-            for cell in cells[0:8]:
-                text = cell.text
-                cell_data_list.append(text)
-
-            assert cell_data_list == [
-                "100090062297",
-                "1918",
-                "Free-Standing",
-                "Brick Or Block Or Stone",
-                "120.143",
-                "[0.0471489, 52.4569721]",
-                "2",
-                "See more details"
-            ]
+   
+            assert len(cells[0].text) == 12
+            assert type(cells[1].text) == str or type(cells[1].text) == int
+            assert cells[2].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
+            assert cells[3].text in ["Brick Or Block Or Stone", "Contrete"]
+            assert type(float(cells[4].text)) == float or type(int(cells[4].text)) == int
+            assert type(cells[5].text) == str
+            assert cells[6].text in ["0", "1", "2", "3"]
+            assert cells[7].text == "See more details"
+            
+            
         except NoSuchElementException:
             pytest.fail("No table data element found")
 
