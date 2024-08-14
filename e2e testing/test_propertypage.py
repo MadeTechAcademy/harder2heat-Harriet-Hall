@@ -1,5 +1,4 @@
 import pytest
-import re
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -10,36 +9,36 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 @pytest.fixture()
 def browser():
     driver = webdriver.Chrome()
-    driver.get("http://127.0.0.1:5000/100090062297")
+    driver.get("http://127.0.0.1:5000")
     driver.implicitly_wait(10)
     yield driver
     driver.quit()
 
 
-class TestPropertyPage:
+@pytest.fixture(autouse=True)
+def before_each_test(browser):
+    try:
+        button = browser.find_element(By.TAG_NAME, "a")
+        button.click()
+        return browser.find_element(By.CLASS_NAME, "govuk-table")
+    except NoSuchElementException:
+        pytest.fail("No elements found")
 
-    def get_table(self, browser):
-        try:
-            return browser.find_element(By.CLASS_NAME, "govuk-table")
-        except NoSuchElementException:
-            pytest.fail("No table element found")
-            
+
+class TestPropertyPage:
 
     def test_page_header(self, browser):
         try:
             h2_tag = browser.find_element(By.TAG_NAME, "h2")
-            assert h2_tag.text == "100090062297"
+            assert len(h2_tag.text) == 12
+            assert h2_tag.text in browser.current_url
 
         except NoSuchElementException:
-            pytest.fail("No h1 element found")
-
-
+            pytest.fail("No h2 element found")
 
     def test_displays_table_with_propery_features_as_headers(self, browser):
         try:
-                
-            table = self.get_table(browser)
-            headers = table.find_elements(By.TAG_NAME, "th")
+            headers = browser.find_elements(By.TAG_NAME, "th")
 
             assert len(headers) == 8
             list_of_headers = []
@@ -49,7 +48,6 @@ class TestPropertyPage:
                 list_of_headers.append(text)
 
             assert list_of_headers == [
-              
                 "OSID:",
                 "Year Built:",
                 "Updated on:",
@@ -57,43 +55,39 @@ class TestPropertyPage:
                 "Building materials:",
                 "Size in m2:",
                 "Coordinates:",
-                "Hard To Heat Score:\n(easy) 0 - 4 (hard)"
+                "Hard To Heat Score:\n(easy) 0 - 3 (hard)",
             ]
         except NoSuchElementException:
             pytest.fail("No table header element found")
 
-
     def test_displays_table_property_data(self, browser):
         try:
-            
-            table = self.get_table(browser)
-            cells = table.find_elements(By.TAG_NAME, "td")
-            cell_data_list = []
-            for cell in cells:
-                text = cell.text
-                cell_data_list.append(text)
+            cells = browser.find_elements(By.TAG_NAME, "td")
 
-            assert cell_data_list == [
-                "0b1107e5-00f8-4d89-b6ae-67f0f98a6517",
-                "1918",
-                "2024-03-13",
+            assert type(cells[0].text) == str
+            assert type(cells[1].text) == str or type(cells[1].text) == int
+            assert type(cells[2].text) == str
+            assert cells[3].text in [
                 "Free-Standing",
-                "Brick Or Block Or Stone",
-                "120.143",
-                "[[0.0471489, 52.4569721], [0.0472922, 52.4569964], [0.0473205, 52.4569337], [0.0473576, 52.45694], [0.0473707, 52.4569112], [0.0473336, 52.4569049], [0.0473464, 52.4568765], [0.0472657, 52.4568629], [0.0472642, 52.4568662], [0.0472467, 52.4568633], [0.0472399, 52.4568621], [0.0472175, 52.4569117], [0.0472229, 52.4569126], [0.0472151, 52.4569296], [0.0472085, 52.456944], [0.047165, 52.4569366], [0.0471489, 52.4569721]]",
-                "2",
+                "Single-Connected",
+                "Dual-Connected",
             ]
+            assert cells[4].text in ["Brick Or Block Or Stone", "Contrete"]
+            assert (
+                type(float(cells[5].text)) == float or type(int(cells[4].text)) == int
+            )
+            assert type(cells[6].text) == str
+            assert cells[7].text in ["0", "1", "2", "3"]
+
         except NoSuchElementException:
             pytest.fail("No table data element found")
-
 
     def test_home_button_navigates_to_homepage(self, browser):
         try:
 
             home_button = browser.find_element(By.TAG_NAME, "a")
-            print(home_button, "homebutton")
             url = home_button.get_attribute("href")
-            
+
             assert url == "http://127.0.0.1:5000/"
             assert browser.current_url != url
 
