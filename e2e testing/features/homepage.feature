@@ -33,6 +33,7 @@ Feature: Home Page
   Scenario: Display number of properties in the footer
     Given I am on the home page
     Then the footer should display "Properties : 4"
+    And the number of properties should be "4"
 
   Scenario: Display "See more details" button in the table
     Given I am on the home page

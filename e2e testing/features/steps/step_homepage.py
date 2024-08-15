@@ -77,6 +77,15 @@ def step_check_footer_text(context, text):
     assert footer_tag.text == text
 
 
+@then('the number of properties should be "{count}"')
+def step_check_number_of_properties(context, count):
+
+    footer_tag = context.browser.find_element(By.TAG_NAME, "footer")
+    regex_find_num_of_properties = re.search(r"\d+", footer_tag.text)
+    number_of_properties = int(regex_find_num_of_properties.group())
+    assert number_of_properties == int(count)
+
+
 @then('there should be a "See more details" button for each property')
 def step_check_see_more_button(context):
 
