@@ -7,3 +7,17 @@ Feature: Home Page
   Scenario: Display main title on the home page
     Given I am on the home page
     Then the main title should be "Harder to Heat Homes"
+
+  Scenario: Display table with property features as headers
+    Given I am on the home page
+    Then the homepage table should have the following headers:
+      |                                         |
+      | UPRN                                    |
+      | Year Built                              |
+      | Connectivity                            |
+      | Building materials                      |
+      | Size in m2                              |
+      | Coordinates                             |
+      | Hard To Heat Score: (easy) 0 - 3 (hard) |
+      |                                         |
+    
