@@ -20,3 +20,16 @@ def step_then_page_header_should_be_the_uprn_of_the_property(context):
         h2 = h2_tag.text[6:]
         assert len(h2) == 12
         assert h2 in context.browser.current_url
+
+@then('the property table should have the following headers')
+def step_then_table_should_have_headers(context):
+
+    headers = context.browser.find_elements(By.TAG_NAME, "th")
+
+    assert context.table[0][0] == headers[0].text
+    assert context.table[1][0] == headers[1].text
+    assert context.table[2][0] == headers[2].text
+    assert context.table[3][0] == headers[3].text
+    assert context.table[4][0] == headers[4].text
+    assert context.table[5][0] == headers[5].text
+    assert context.table[6][0] == headers[6].text.replace("\n", "")
