@@ -17,6 +17,7 @@ def step_check_browser_bar_title(context):
     
     assert context.browser.title == "Harder to Heat Homes"  
 
+
 @then('the main title should be "{title}"')
 def step_check_main_title(context, title):
 
@@ -37,4 +38,10 @@ def step_check_table_headers(context):
     assert context.table[5][0] == headers[5].text
     assert context.table[6][0] == headers[6].text.replace("\n", " ")
     assert context.table[7][0] == headers[7].text
+
+
+@then("the homepage table should have 8 headers in total")
+def step_and_the_table_should_have_8_headers(context):
+    headers = context.browser.find_elements(By.TAG_NAME, "th")
+    assert len(headers) == 8
 
