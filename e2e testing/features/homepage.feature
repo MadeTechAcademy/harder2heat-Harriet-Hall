@@ -30,6 +30,10 @@ Feature: Home Page
     Given I am on the home page
     Then the table should display more than 1 properties
 
+  Scenario: Display number of properties in the footer
+    Given I am on the home page
+    Then the footer should display "Properties : 4"
+
   Scenario: Display "See more details" button in the table
     Given I am on the home page
     Then there should be a "See more details" button for each property
