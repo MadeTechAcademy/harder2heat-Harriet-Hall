@@ -53,3 +53,12 @@ def step_then_table_should_display_valid_property_data(context):
         assert type(cells[6].text) == str
         assert cells[7].text in ["0", "1", "2", "3"]
 
+
+@when('I click the home button')
+def step_when_i_click_the_home_button(context):
+
+        home_button = context.browser.find_element(By.TAG_NAME, "a")
+        context.home_url = home_button.get_attribute("href")
+        home_button.click()
+        WebDriverWait(context.browser, 10).until(EC.url_to_be(context.home_url))
+   
