@@ -33,4 +33,4 @@ Feature: Home Page
   Scenario: Display "See more details" button in the table
     Given I am on the home page
     Then there should be a "See more details" button for each property
-    
+    And the button style should be "color: black; text-decoration: none;"

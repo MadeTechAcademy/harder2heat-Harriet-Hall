@@ -76,3 +76,10 @@ def step_check_see_more_button(context):
     table = context.browser.find_element(By.ID, "data")
     button = table.find_element(By.TAG_NAME, "a")
     assert button.text == "See more details"
+
+
+@then('the button style should be "{style}"')
+def step_check_button_style(context, style):
+
+    button = context.browser.find_element(By.TAG_NAME, "a")
+    assert button.get_attribute("style") == style
