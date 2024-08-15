@@ -70,6 +70,13 @@ def step_check_multiple_properties(context):
     assert len(rows) > 2
 
 
+@then('the footer should display "{text}"')
+def step_check_footer_text(context, text):
+
+    footer_tag = context.browser.find_element(By.TAG_NAME, "footer")
+    assert footer_tag.text == text
+
+
 @then('there should be a "See more details" button for each property')
 def step_check_see_more_button(context):
 
