@@ -83,3 +83,14 @@ def step_check_button_style(context, style):
 
     button = context.browser.find_element(By.TAG_NAME, "a")
     assert button.get_attribute("style") == style
+
+
+@when('I click on the "See more details" button for the property with "{URPN}" as its UPRN')
+def step_click_see_more_button(context, URPN):
+
+    button_href = f'//a[contains(@href, "{URPN}")]'
+    button = context.browser.find_element(By.XPATH, button_href)
+    context.property_url = button.get_attribute('href')
+    button.click()
+    WebDriverWait(context.browser, 10).until(EC.url_to_be(context.property_url))
+    

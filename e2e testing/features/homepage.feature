@@ -34,3 +34,8 @@ Feature: Home Page
     Given I am on the home page
     Then there should be a "See more details" button for each property
     And the button style should be "color: black; text-decoration: none;"
+
+  Scenario: Button navigates to property page with UPRN
+    Given I am on the home page
+    When I click on the "See more details" button for the property with "100090062842" as its UPRN
+    
