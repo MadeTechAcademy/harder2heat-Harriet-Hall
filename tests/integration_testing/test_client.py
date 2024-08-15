@@ -49,7 +49,7 @@ class TestClient(unittest.TestCase):
                     },
                     "properties": {
                         "osid": "456",
-                        "connectivity": "Free-Standing",
+                        "connectivity": "Standalone",
                         "uprnreference": [
                             {
                                 "uprn": 2,
@@ -92,7 +92,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(body, None)
 
     @patch("client.requests")
-    def test_get_council_properties_from_api_returns_correct_data(self, mock_requests):
+    def test_api_response_data_matches_expected_property_attributes(self, mock_requests):
 
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -164,3 +164,33 @@ class TestClient(unittest.TestCase):
         council = Council("council_1", "France")
         council.generate_property_class_list(body["data"])
         self.assertEqual(len(council.list_of_properties), 0)
+
+    @patch("client.requests")
+    def test_api_response_data_matches_expected_property_scoring_criteria(self, mock_requests):
+        
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = self.mock_data
+        mock_requests.get.return_value = mock_response
+
+        status, body = get_council_properties_from_api(self.url)
+
+        self.assertTrue(status)
+        council = Council("council_1", "France")
+        council.generate_property_class_list(body["data"])
+        [property_1, property_2] = council.list_of_properties
+
+        
+        self.assertEqual(property_1.score, 0)
+        self.assertEqual(property_2.score, 0)
+        
+        council.get_hardest_to_heat_properties()
+
+        self.assertEqual(property_1.score, 0)
+        self.assertEqual(property_2.score, 2)
+        
+        
+  
+
+                         
+                         
