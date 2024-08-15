@@ -137,3 +137,21 @@ class TestClient(unittest.TestCase):
         council = Council("council_1", "France")
         council.generate_property_class_list(body["data"])
         self.assertTrue(len(council.list_of_properties), 2)
+        
+    
+    @patch("client.requests")
+    def test_when_api_responses_with_no_property_data(self, mock_requests):
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {"data": []}
+        mock_requests.get.return_value = mock_response
+
+        status, body = get_council_properties_from_api(self.url)
+
+        self.assertTrue(status)
+        council = Council("council_1", "France")
+        council.generate_property_class_list(body["data"])
+        self.assertEqual(len(council.list_of_properties), 0)
+        
+        
