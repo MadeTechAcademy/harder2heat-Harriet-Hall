@@ -94,3 +94,7 @@ def step_click_see_more_button(context, URPN):
     button.click()
     WebDriverWait(context.browser, 10).until(EC.url_to_be(context.property_url))
     
+
+@then("I should be navigated to the correct property page")
+def step_check_navigated_url(context):
+    assert context.browser.current_url == context.property_url
