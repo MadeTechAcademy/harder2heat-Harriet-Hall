@@ -20,4 +20,4 @@ Feature: Home Page
       | Coordinates                             |
       | Hard To Heat Score: (easy) 0 - 3 (hard) |
       |                                         |
-    
+    And the homepage table should have 8 headers in total
