@@ -17,6 +17,6 @@ def step_given_i_am_on_the_property_page(context):
 def step_then_page_header_should_be_the_uprn_of_the_property(context):
 
         h2_tag = context.browser.find_element(By.TAG_NAME, "h2")
-        assert len(h2_tag.text) == 12
-        assert h2_tag.text in context.browser.current_url
-
+        h2 = h2_tag.text[6:]
+        assert len(h2) == 12
+        assert h2 in context.browser.current_url
