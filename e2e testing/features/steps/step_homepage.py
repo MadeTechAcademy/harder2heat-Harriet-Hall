@@ -16,3 +16,10 @@ def step_open_home_page(context):
 def step_check_browser_bar_title(context):
     
     assert context.browser.title == "Harder to Heat Homes"  
+
+@then('the main title should be "{title}"')
+def step_check_main_title(context, title):
+
+    h1_tag = context.browser.find_element(By.TAG_NAME, "h1")
+    assert h1_tag.text == title
+
