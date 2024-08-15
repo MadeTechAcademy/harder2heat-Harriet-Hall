@@ -38,4 +38,4 @@ Feature: Home Page
   Scenario: Button navigates to property page with UPRN
     Given I am on the home page
     When I click on the "See more details" button for the property with "100090062842" as its UPRN
-    
+    Then I should be navigated to the correct property page
