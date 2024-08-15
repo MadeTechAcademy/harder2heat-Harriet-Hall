@@ -1,4 +1,9 @@
-import pytest 
+import pytest
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from src.council import Council
 from src.french_property import FrenchProperty
 
@@ -25,24 +30,24 @@ data = (
             "buildingage_period": "1980-1989",
             "constructionmaterial": "Brick Or Block Or Stone",
             "buildingage_updatedate": "2024-05-20",
-            "number_of_floors" : 2,
-            "distance_to_public_transport_meters" : 10
+            "number_of_floors": 2,
+            "distance_to_public_transport_meters": 10,
         },
     },
-    
 )
+
 
 @pytest.fixture
 def french_council():
     french_council = Council("council_1", "France")
-    yield french_council 
+    yield french_council
 
 
 def test_generate_property_class_list_when_country_is_France(french_council):
     french_council.generate_property_class_list(data)
     assert isinstance(french_council.list_of_properties[0], FrenchProperty)
     french_property = french_council.list_of_properties[0]
-    
+
     assert french_property.uprn == 1
     assert french_property.year == 1988
     assert french_property.connectivity == "Semi-Connected"
@@ -56,4 +61,3 @@ def test_generate_property_class_list_when_country_is_France(french_council):
     assert french_property.osid == "123"
     assert french_property.floors == 2
     assert french_property.distance_to_transport == 10
-

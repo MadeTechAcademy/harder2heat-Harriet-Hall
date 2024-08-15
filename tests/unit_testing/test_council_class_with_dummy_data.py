@@ -1,4 +1,9 @@
 import json
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from src.council import Council
 from src.property import Property
 
@@ -6,7 +11,7 @@ from src.property import Property
 with open("./properties.json", "r") as data:
     dummy_data = json.load(data)
     council = Council("name", "UK")
-    
+
 
 def test_generate_property_class_list_updates_list_of_properties_with_dummy_data():
     council.generate_property_class_list(dummy_data)
@@ -39,9 +44,9 @@ def test_get_hardest_to_heat_properties_updates_property_score():
 
     for property in council.list_of_properties:
         assert property.score == 0
-        
+
     council.get_hardest_to_heat_properties()
     scores = []
     for property in council.list_of_properties:
-            scores.append(property.score)
-    assert scores == [2, 0, 0, 0] 
+        scores.append(property.score)
+    assert scores == [2, 0, 0, 0]

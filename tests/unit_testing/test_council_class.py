@@ -1,11 +1,19 @@
+import pytest
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
 from src.council import Council
 from src.property import Property
-import pytest
+
+
 
 @pytest.fixture
 def uk_council():
     uk_council = Council("council_1", "UK")
-    yield uk_council 
+    yield uk_council
+
 
 data = (
     {
@@ -32,12 +40,13 @@ data = (
             "buildingage_updatedate": "2024-05-20",
         },
     },
-    
 )
+
 
 def test_council_class_has_name_attribute(uk_council):
     assert uk_council.name == "council_1"
     assert uk_council.country == "UK"
+
 
 def test_council_class_has_list_of_properties(uk_council):
     assert type(uk_council.list_of_properties) is list
@@ -46,9 +55,8 @@ def test_council_class_has_list_of_properties(uk_council):
 def test_generate_property_class_list_updates_list_of_properties(uk_council):
     uk_council.generate_property_class_list(data)
     property = uk_council.list_of_properties[0]
-    assert isinstance(property, Property) 
+    assert isinstance(property, Property)
 
-    
     assert property.uprn == 1
     assert property.year == 1988
     assert property.connectivity == "Semi-Connected"
@@ -64,6 +72,7 @@ def test_generate_property_class_list_updates_list_of_properties(uk_council):
 
 property_1 = Property(1, 2000, "", "", [], 0, "", "")
 property_2 = Property(1, 1900, "", "", [], 0, "", "")
+
 
 def test_get_hardest_to_heat_properties_updates_property_score(uk_council):
     uk_council.list_of_properties = [property_1, property_2]
