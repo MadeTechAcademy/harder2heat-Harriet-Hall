@@ -102,9 +102,20 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
         self.assertTrue(status)
         self.assertEqual(body["status"], "ok")
-        self.assertEqual(body["data"][0]["properties"]["number_of_floors"], 2)
+        property = body["data"][0]["properties"]
+        
+        self.assertEqual(property["uprnreference"][0]["uprn"], 1)
+        self.assertEqual(property["buildingage_year"], 1988)
+        self.assertEqual(property["connectivity"], "Semi-Connected")
+        self.assertEqual(property["constructionmaterial"], "Brick Or Block Or Stone")
+        self.assertEqual(body["data"][0]["geometry"]["coordinates"][0][0], [0.0452889, 52.4569136])
+        self.assertEqual(property["geometry_area_m2"], 11)
+        self.assertEqual(property["osid"], "123")
+        self.assertEqual(property["buildingage_updatedate"], "2024-05-20")
+        self.assertEqual(property["osid"], "123")
+        self.assertEqual(property["number_of_floors"], 2)
         self.assertEqual(
-            body["data"][0]["properties"]["distance_to_public_transport_meters"], 19
+            property["distance_to_public_transport_meters"], 19
         )
 
     @patch("client.requests")
@@ -117,6 +128,7 @@ class TestClient(unittest.TestCase):
 
         status, body = get_council_properties_from_api(self.url)
         self.assertTrue(status)
+
         council = Council("council_1", "France")
         council.generate_property_class_list(body["data"])
         self.assertTrue(council.list_of_properties[0], Property)
@@ -137,8 +149,7 @@ class TestClient(unittest.TestCase):
         council = Council("council_1", "France")
         council.generate_property_class_list(body["data"])
         self.assertTrue(len(council.list_of_properties), 2)
-        
-    
+
     @patch("client.requests")
     def test_when_api_responses_with_no_property_data(self, mock_requests):
 
@@ -153,5 +164,3 @@ class TestClient(unittest.TestCase):
         council = Council("council_1", "France")
         council.generate_property_class_list(body["data"])
         self.assertEqual(len(council.list_of_properties), 0)
-        
-        
