@@ -29,3 +29,8 @@ Feature: Home Page
   Scenario: Display multiple properties in the table
     Given I am on the home page
     Then the table should display more than 1 properties
+
+  Scenario: Display "See more details" button in the table
+    Given I am on the home page
+    Then there should be a "See more details" button for each property
+    
