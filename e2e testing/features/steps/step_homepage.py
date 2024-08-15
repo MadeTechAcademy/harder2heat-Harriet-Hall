@@ -61,3 +61,11 @@ def step_check_table_data(context):
     assert cells[6].text in ["0", "1", "2", "3"]
     assert cells[7].text == "See more details"
 
+
+@then("the table should display more than 1 properties")
+def step_check_multiple_properties(context):
+
+    table = context.browser.find_element(By.ID, "data")
+    rows = table.find_elements(By.TAG_NAME, "tr")
+    assert len(rows) > 2
+

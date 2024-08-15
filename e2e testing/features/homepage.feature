@@ -25,3 +25,7 @@ Feature: Home Page
   Scenario: Display table property data
     Given I am on the home page
     Then the table data should be accurate
+
+  Scenario: Display multiple properties in the table
+    Given I am on the home page
+    Then the table should display more than 1 properties
