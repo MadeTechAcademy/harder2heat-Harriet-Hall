@@ -61,4 +61,9 @@ def step_when_i_click_the_home_button(context):
         context.home_url = home_button.get_attribute("href")
         home_button.click()
         WebDriverWait(context.browser, 10).until(EC.url_to_be(context.home_url))
-   
+        
+@then('I should be navigated to the homepage')
+def step_then_i_should_be_navigated_to_homepage(context):
+    
+        assert context.browser.current_url == context.home_url
+

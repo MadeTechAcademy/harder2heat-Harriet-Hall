@@ -25,4 +25,4 @@ Feature: Property Page
   Scenario: Home button navigates to the homepage
     Given I am on the property page
     When I click the home button
-   
+    Then I should be navigated to the homepage
