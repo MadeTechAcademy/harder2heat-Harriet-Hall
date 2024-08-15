@@ -45,3 +45,19 @@ def step_and_the_table_should_have_8_headers(context):
     headers = context.browser.find_elements(By.TAG_NAME, "th")
     assert len(headers) == 8
 
+
+@then("the table data should be accurate")
+def step_check_table_data(context):
+    table = context.browser.find_element(By.ID, "data")
+    cells = table.find_elements(By.TAG_NAME, "td")
+    assert len(cells[0].text) == 12
+    assert isinstance(cells[1].text, (str, int))
+    assert cells[2].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
+    assert cells[3].text in ["Brick Or Block Or Stone", "Concrete"]
+    assert isinstance(float(cells[4].text), float) or isinstance(
+        int(cells[4].text), int
+    )
+    assert isinstance(cells[5].text, str)
+    assert cells[6].text in ["0", "1", "2", "3"]
+    assert cells[7].text == "See more details"
+

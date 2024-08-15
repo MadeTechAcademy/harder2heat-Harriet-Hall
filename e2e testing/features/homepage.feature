@@ -21,3 +21,7 @@ Feature: Home Page
       | Hard To Heat Score: (easy) 0 - 3 (hard) |
       |                                         |
     And the homepage table should have 8 headers in total
+
+  Scenario: Display table property data
+    Given I am on the home page
+    Then the table data should be accurate
