@@ -39,3 +39,17 @@ def step_and_the_table_should_have_8_headers(context):
     headers = context.browser.find_elements(By.TAG_NAME, "th")
     assert len(headers) == 8
     
+@then('the table should display valid property data')
+def step_then_table_should_display_valid_property_data(context):
+
+        cells = context.browser.find_elements(By.TAG_NAME, "td")
+
+        assert type(cells[0].text) == str
+        assert type(cells[1].text) in [str, int]
+        assert type(cells[2].text) == str
+        assert cells[3].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
+        assert cells[4].text in ["Brick Or Block Or Stone", "Concrete"]
+        assert type(float(cells[5].text)) in [float, int]
+        assert type(cells[6].text) == str
+        assert cells[7].text in ["0", "1", "2", "3"]
+
