@@ -21,3 +21,8 @@ Feature: Property Page
   Scenario: Display table property data
     Given I am on the property page
     Then the table should display valid property data
+
+  Scenario: Home button navigates to the homepage
+    Given I am on the property page
+    When I click the home button
+   
