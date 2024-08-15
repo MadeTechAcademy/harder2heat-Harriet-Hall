@@ -1,6 +1,11 @@
-from src.property import Property
 import pytest
 import json
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
+
+from src.property import Property
 
 with open("./properties.json", "r") as data:
     dummy_data = json.load(data)
@@ -84,6 +89,7 @@ def test_handle_connectivity_with_semi_connected(dummy_property):
 
 dummy_end_connected = dummy_data[1]["properties"]
 
+
 @pytest.fixture
 def dummy_property_1():
     uprn = dummy_end_connected["uprnreference"][0]["uprn"]
@@ -93,7 +99,7 @@ def dummy_property_1():
 
 
 def test_handle_connectivity_with_end_connected(dummy_property_1):
-   
+
     assert dummy_property_1.connectivity == "End-Connected"
     dummy_property_1.handle_connectivity()
     assert dummy_property_1.connectivity == "Dual-Connected"
