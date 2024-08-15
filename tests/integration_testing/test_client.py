@@ -3,7 +3,7 @@ from unittest.mock import patch, MagicMock
 from client import get_council_properties_from_api
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 from src.council import Council
 
 
