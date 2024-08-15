@@ -47,8 +47,9 @@ class Property:
             self.year = MINIMUM_FAILING_YEAR
         elif type(self.year) is not int:
             self.year = int(self.year[-4:])
-        else:   
+        else:
             self.year
+      
 
     def handle_connectivity(self):
         if self.connectivity == "Standalone":
