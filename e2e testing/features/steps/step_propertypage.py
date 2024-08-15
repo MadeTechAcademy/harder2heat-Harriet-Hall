@@ -33,3 +33,9 @@ def step_then_table_should_have_headers(context):
     assert context.table[4][0] == headers[4].text
     assert context.table[5][0] == headers[5].text
     assert context.table[6][0] == headers[6].text.replace("\n", "")
+
+@then('the property table should have 8 headers in total')
+def step_and_the_table_should_have_8_headers(context):
+    headers = context.browser.find_elements(By.TAG_NAME, "th")
+    assert len(headers) == 8
+    

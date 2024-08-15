@@ -16,4 +16,4 @@ Feature: Property Page
       | Size in m2:                                   |
       | Coordinates:                                  |
       | Hard To Heat Score: (easy) 0 - 3 (hard)       |
-     
+      And the property table should have 8 headers in total
