@@ -69,3 +69,10 @@ def step_check_multiple_properties(context):
     rows = table.find_elements(By.TAG_NAME, "tr")
     assert len(rows) > 2
 
+
+@then('there should be a "See more details" button for each property')
+def step_check_see_more_button(context):
+
+    table = context.browser.find_element(By.ID, "data")
+    button = table.find_element(By.TAG_NAME, "a")
+    assert button.text == "See more details"
