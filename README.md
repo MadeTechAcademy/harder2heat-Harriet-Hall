@@ -47,7 +47,7 @@ Navigate to the mocking branch:
 
 Navigate to the integration directory:
 
- cd tests/integration_testing  
+- cd tests/integration_testing  
 
 Run the tests:
 
