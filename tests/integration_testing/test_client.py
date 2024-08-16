@@ -56,10 +56,10 @@ class TestClient(unittest.TestCase):
                                 "uprn": 2,
                             }
                         ],
-                        "buildingage_year": 1900,
+                        "buildingage_year": "",
                         "geometry_area_m2": 11,
-                        "buildingage_period": "1980-1989",
-                        "constructionmaterial": "Brick Or Block Or Stone",
+                        "buildingage_period": "None",
+                        "constructionmaterial": "Concrete",
                         "buildingage_updatedate": "2024-05-20",
                         "number_of_floors": 1,
                         "distance_to_public_transport_meters": 44,
@@ -139,7 +139,6 @@ class TestClient(unittest.TestCase):
         self.assertEqual(property["geometry_area_m2"], 11)
         self.assertEqual(property["osid"], "123")
         self.assertEqual(property["buildingage_updatedate"], "2024-05-20")
-        self.assertEqual(property["osid"], "123")
         self.assertEqual(property["number_of_floors"], 2)
         self.assertEqual(property["distance_to_public_transport_meters"], 19)
 
@@ -209,4 +208,4 @@ class TestClient(unittest.TestCase):
         self.council.get_hardest_to_heat_properties()
 
         self.assertEqual(property_1.score, 0)
-        self.assertEqual(property_2.score, 2)
+        self.assertEqual(property_2.score, 3)
