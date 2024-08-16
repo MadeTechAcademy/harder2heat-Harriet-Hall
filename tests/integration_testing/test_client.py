@@ -90,7 +90,7 @@ class TestClient(unittest.TestCase):
 
         status, body = get_council_properties_from_api(self.url)
         self.assertFalse(status)
-        self.assertEqual(body, None)
+        self.assertEqual(body, "Status code: 500, Internal Server Error")
 
     @patch("client.requests")
     def test_api_response_data_matches_expected_property_attributes(self, mock_requests):
