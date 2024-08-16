@@ -53,3 +53,17 @@ Run the tests:
 
 - coverage run -m pytest test_client.py   
 
+
+
+Part 3.A of the project:
+
+Showing a non-developer the BDD tests and getting their response:
+
+https://docs.google.com/document/d/1VgYvaLObYi91cj_mm7WLnJ0Rrgz3dVW49onc2KMGuiE/edit
+
+Part 3.B of the project:
+
+Documenting how I shared TDD with a non-developer:
+
+https://docs.google.com/document/d/1iKTe_Qkdu9WdUKbqM30xNUPRa_tACCPGi4x2lH6em7Q/edit?addon_store
+
