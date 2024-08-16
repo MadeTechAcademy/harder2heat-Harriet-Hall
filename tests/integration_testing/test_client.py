@@ -11,7 +11,8 @@ from src.property import Property
 
 class TestClient(unittest.TestCase):
     def setUp(self):
-        self.url = "/council/properties"
+        self.council = Council("Lyon", "France")
+        self.url = f"/{self.council.name}/properties"
         self.mock_data = {
             "data": [
                 {
@@ -129,11 +130,11 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
         self.assertTrue(status)
 
-        council = Council("council_1", "France")
-        council.generate_property_class_list(body["data"])
-        self.assertTrue(council.list_of_properties[0], Property)
-        self.assertEqual(council.list_of_properties[0].floors, 2)
-        self.assertEqual(council.list_of_properties[0].distance_to_transport, 19)
+        
+        self.council.generate_property_class_list(body["data"])
+        self.assertTrue(self.council.list_of_properties[0], Property)
+        self.assertEqual(self.council.list_of_properties[0].floors, 2)
+        self.assertEqual(self.council.list_of_properties[0].distance_to_transport, 19)
 
     @patch("client.requests")
     def test_when_api_responses_with_multiple_properties(self, mock_requests):
@@ -146,9 +147,8 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
 
         self.assertTrue(status)
-        council = Council("council_1", "France")
-        council.generate_property_class_list(body["data"])
-        self.assertTrue(len(council.list_of_properties), 2)
+        self.council.generate_property_class_list(body["data"])
+        self.assertTrue(len(self.council.list_of_properties), 2)
 
     @patch("client.requests")
     def test_when_api_responses_with_no_property_data(self, mock_requests):
@@ -161,9 +161,8 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
 
         self.assertTrue(status)
-        council = Council("council_1", "France")
-        council.generate_property_class_list(body["data"])
-        self.assertEqual(len(council.list_of_properties), 0)
+        self.council.generate_property_class_list(body["data"])
+        self.assertEqual(len(self.council.list_of_properties), 0)
 
     @patch("client.requests")
     def test_api_response_data_matches_expected_property_scoring_criteria(self, mock_requests):
@@ -176,15 +175,14 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
 
         self.assertTrue(status)
-        council = Council("council_1", "France")
-        council.generate_property_class_list(body["data"])
-        [property_1, property_2] = council.list_of_properties
+        self.council.generate_property_class_list(body["data"])
+        [property_1, property_2] = self.council.list_of_properties
 
         
         self.assertEqual(property_1.score, 0)
         self.assertEqual(property_2.score, 0)
         
-        council.get_hardest_to_heat_properties()
+        self.council.get_hardest_to_heat_properties()
 
         self.assertEqual(property_1.score, 0)
         self.assertEqual(property_2.score, 2)
