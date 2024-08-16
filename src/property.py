@@ -43,13 +43,12 @@ class Property:
         self.score = score
     
     def handle_year_string(self):
-        if self.year == "None":
-            self.year = MINIMUM_FAILING_YEAR
-        elif type(self.year) is not int:
-            self.year = int(self.year[-4:])
-        else:
-            self.year
-      
+            if self.year == "None":
+                self.year = MINIMUM_FAILING_YEAR
+            elif type(self.year) is not int:
+                self.year = int(self.year[-4:])
+            else:   
+                self.year
 
     def handle_connectivity(self):
         if self.connectivity == "Standalone":
