@@ -43,7 +43,7 @@ class Property:
         self.score = score
     
     def handle_year_string(self):
-        if self.year == "None":
+        if self.year == "None" or self.year == "":
             self.year = MINIMUM_FAILING_YEAR
         elif type(self.year) is not int:
             self.year = int(self.year[-4:])
