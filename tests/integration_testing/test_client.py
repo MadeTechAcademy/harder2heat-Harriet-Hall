@@ -91,7 +91,7 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
         self.assertFalse(status)
         self.assertEqual(body, "Status code: 500, Internal Server Error")
-        
+
     @patch("client.requests")
     def test_get_council_properties_from_api_returns_404(self, mock_requests):
 
@@ -103,9 +103,21 @@ class TestClient(unittest.TestCase):
         self.assertFalse(status)
         self.assertEqual(body, "Status code: 404, Not Found")
 
+    @patch("client.requests")
+    def test_get_council_properties_from_api_returns_status_code_not_already_tested(self, mock_requests):
+
+        mock_response = MagicMock()
+        mock_response.status_code = 400
+        mock_requests.get.return_value = mock_response
+
+        status, body = get_council_properties_from_api(self.url)
+        self.assertFalse(status)
+        self.assertEqual(body, "Status code: 400, Error")
 
     @patch("client.requests")
-    def test_api_response_data_matches_expected_property_attributes(self, mock_requests):
+    def test_api_response_data_matches_expected_property_attributes(
+        self, mock_requests
+    ):
 
         mock_response = MagicMock()
         mock_response.status_code = 200
@@ -116,20 +128,20 @@ class TestClient(unittest.TestCase):
         self.assertTrue(status)
         self.assertEqual(body["status"], "ok")
         property = body["data"][0]["properties"]
-        
+
         self.assertEqual(property["uprnreference"][0]["uprn"], 1)
         self.assertEqual(property["buildingage_year"], 1988)
         self.assertEqual(property["connectivity"], "Semi-Connected")
         self.assertEqual(property["constructionmaterial"], "Brick Or Block Or Stone")
-        self.assertEqual(body["data"][0]["geometry"]["coordinates"][0][0], [0.0452889, 52.4569136])
+        self.assertEqual(
+            body["data"][0]["geometry"]["coordinates"][0][0], [0.0452889, 52.4569136]
+        )
         self.assertEqual(property["geometry_area_m2"], 11)
         self.assertEqual(property["osid"], "123")
         self.assertEqual(property["buildingage_updatedate"], "2024-05-20")
         self.assertEqual(property["osid"], "123")
         self.assertEqual(property["number_of_floors"], 2)
-        self.assertEqual(
-            property["distance_to_public_transport_meters"], 19
-        )
+        self.assertEqual(property["distance_to_public_transport_meters"], 19)
 
     @patch("client.requests")
     def test_when_api_responses_with_one_property(self, mock_requests):
@@ -142,7 +154,6 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
         self.assertTrue(status)
 
-        
         self.council.generate_property_class_list(body["data"])
         self.assertTrue(self.council.list_of_properties[0], Property)
         self.assertEqual(self.council.list_of_properties[0].floors, 2)
@@ -177,8 +188,10 @@ class TestClient(unittest.TestCase):
         self.assertEqual(len(self.council.list_of_properties), 0)
 
     @patch("client.requests")
-    def test_api_response_data_matches_expected_property_scoring_criteria(self, mock_requests):
-        
+    def test_api_response_data_matches_expected_property_scoring_criteria(
+        self, mock_requests
+    ):
+
         mock_response = MagicMock()
         mock_response.status_code = 200
         mock_response.json.return_value = self.mock_data
@@ -190,17 +203,10 @@ class TestClient(unittest.TestCase):
         self.council.generate_property_class_list(body["data"])
         [property_1, property_2] = self.council.list_of_properties
 
-        
         self.assertEqual(property_1.score, 0)
         self.assertEqual(property_2.score, 0)
-        
+
         self.council.get_hardest_to_heat_properties()
 
         self.assertEqual(property_1.score, 0)
         self.assertEqual(property_2.score, 2)
-        
-        
-  
-
-                         
-                         

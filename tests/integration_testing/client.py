@@ -9,4 +9,5 @@ def get_council_properties_from_api(url):
         return (False, f"Status code: {res.status_code}, Internal Server Error")
     elif res.status_code == 404:
         return (False, f"Status code: {res.status_code}, Not Found")
+    return (False, f"Status code: {res.status_code}, Error")
         
