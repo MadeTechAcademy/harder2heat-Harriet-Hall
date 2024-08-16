@@ -91,6 +91,18 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
         self.assertFalse(status)
         self.assertEqual(body, "Status code: 500, Internal Server Error")
+        
+    @patch("client.requests")
+    def test_get_council_properties_from_api_returns_404(self, mock_requests):
+
+        mock_response = MagicMock()
+        mock_response.status_code = 404
+        mock_requests.get.return_value = mock_response
+
+        status, body = get_council_properties_from_api(self.url)
+        self.assertFalse(status)
+        self.assertEqual(body, "Status code: 404, Not Found")
+
 
     @patch("client.requests")
     def test_api_response_data_matches_expected_property_attributes(self, mock_requests):
