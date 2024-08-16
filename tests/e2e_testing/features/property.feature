@@ -10,7 +10,7 @@ Feature: Property Page
       |                                               |   
       | OSID:                                         |
       | Year Built:                                   |
-      | Year Built last updated on:                                   |
+      | Year Built last updated:                                   |
       | Connectivity:                                 |
       | Building materials:                           |
       | Size in m2:                                   |
