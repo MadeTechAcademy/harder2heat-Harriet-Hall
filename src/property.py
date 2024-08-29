@@ -33,7 +33,7 @@ class Property:
         score = 0
         self.handle_year_string()
         self.handle_connectivity()
-        if self.connectivity == CONNECTIVITY_VALUES["Standalone"]:
+        if self.connectivity == "Free-Standing":
             score += 1
         if self.material not in WARM_MATERIALS and self.material != "":
             score += 1
@@ -52,9 +52,5 @@ class Property:
             self.year
 
     def handle_connectivity(self):
-        if self.connectivity == "Standalone":
-            self.connectivity = CONNECTIVITY_VALUES["Standalone"]
-        elif self.connectivity == "Semi-Connected":
-            self.connectivity = CONNECTIVITY_VALUES["Semi-Connected"]
-        else:
-            self.connectivity = CONNECTIVITY_VALUES["End-Connected"]
+       self.connectivity = CONNECTIVITY_VALUES[self.connectivity]
+      
