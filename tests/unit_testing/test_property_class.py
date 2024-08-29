@@ -40,6 +40,13 @@ def test_property_has_correct_year_when_given_year_as_period():
     property = Property(1, "1980-1989", "End-Connected", "", [], 0, "", "")
     assert property.year == 1989
     
+
+def test_property_has_correct_connectivity_when_given_connectivity_as_standalone():
+    property = Property(1, "", "Standalone", "", [], 0, "", "")
+    assert property.connectivity == "Free-Standing"
+
+
+
 def test_calculate_score_with_hard_to_heat_attributes():
     property.connectivity = "Free-Standing"
     property.material = "not warm material"
