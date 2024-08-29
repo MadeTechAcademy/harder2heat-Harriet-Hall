@@ -7,7 +7,7 @@ CONNECTIVITY_VALUES = {
     "Semi-Connected": "Single-Connected",
     "End-Connected": "Dual-Connected",
 }
-WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
+WARM_MATERIALS = ["Brick Or Block Or Stone", "Concrete"]
 
 
 class Property:
@@ -23,8 +23,8 @@ class Property:
         age_updated_date,
     ):
         self.uprn = uprn
-        self.year = year
-        self.connectivity = connectivity
+        self.year = handle_year_string(year)
+        self.connectivity = handle_connectivity(connectivity)
         self.material = material
         self.coordinates = coordinates
         self.size = size
@@ -34,14 +34,10 @@ class Property:
 
     def calculate_score(self):
         score = 0
-        year = handle_year_string(self.year)
-        connectivity = handle_connectivity(self.connectivity)
-        if connectivity == "Free-Standing":
+        if self.connectivity == "Free-Standing":
             score += 1
-        if self.material not in WARM_MATERIALS and self.material != "":
+        if self.material not in WARM_MATERIALS:
             score += 1
-        if year <= MINIMUM_FAILING_YEAR and year > 0:
+        if self.year <= MINIMUM_FAILING_YEAR and self.year > 0:
             score += 1
-
         self.score = score
-    
