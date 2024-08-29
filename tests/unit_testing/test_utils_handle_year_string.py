@@ -7,7 +7,11 @@ def test_handle_year_string_with_year_as_None():
     property_year = handle_year_string(year)
     assert property_year == 1959
 
-
+def test_handle_year_string_with_year_as_empty_string():
+    year = ""
+    property_year = handle_year_string(year)
+    assert property_year == 1959
+    
 def test_handle_year_string_with_year_known():
     year = 1999
     property_year = handle_year_string(year)
