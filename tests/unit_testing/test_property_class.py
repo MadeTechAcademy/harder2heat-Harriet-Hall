@@ -78,6 +78,12 @@ def test_calculate_score_with_non_hard_to_heat_attributes():
     property.year = 2000
     property.calculate_score()
     assert property.score == 0
+    
+    property.connectivity = "End-Connected"
+    property.material = "Brick Or Block Or Stone"
+    property.year = 1960
+    property.calculate_score()
+    assert property.score == 0
 
 
 def test_calculate_score_with_combination_of_attributes():
