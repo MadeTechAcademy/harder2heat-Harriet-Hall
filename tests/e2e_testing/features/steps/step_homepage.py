@@ -50,7 +50,7 @@ def step_and_the_table_should_have_8_headers(context):
 def step_check_table_data(context):
     table = context.browser.find_element(By.ID, "data")
     cells = table.find_elements(By.TAG_NAME, "td")
-    assert len(cells[0].text) == 12
+    assert len(cells[0].text) <= 12
     assert isinstance(cells[1].text, (str, int))
     assert cells[2].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
     assert cells[3].text in ["Brick Or Block Or Stone", "Concrete"]

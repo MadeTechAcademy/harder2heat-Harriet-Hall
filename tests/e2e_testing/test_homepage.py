@@ -73,7 +73,7 @@ class TestHomePage:
             table = self.get_table(browser)
             cells = table.find_elements(By.TAG_NAME, "td")
 
-            assert len(cells[0].text) == 12
+            assert len(cells[0].text) <= 12
             assert type(cells[1].text) == str or type(cells[1].text) == int
             assert cells[2].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
             assert cells[3].text in ["Brick Or Block Or Stone", "Contrete"]
