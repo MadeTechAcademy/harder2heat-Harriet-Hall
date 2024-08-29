@@ -24,6 +24,10 @@ def test_property_has_extra_attributes():
     assert property.osid == ""
     assert property.age_updated_date == ""
 
+def test_property_has_correct_year_when_given_year_as_None():
+    property = Property(1, "None", "End-Connected", "", [], 0, "", "")
+    assert property.year == 1959
+    
 
 def test_calculate_score_with_hard_to_heat_attributes():
     property.connectivity = "Free-Standing"
