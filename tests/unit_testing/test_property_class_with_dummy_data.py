@@ -3,6 +3,8 @@ import json
 import sys
 import os
 
+from src.utils import handle_connectivity, handle_year_string
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 
 from src.property import Property
@@ -63,32 +65,25 @@ def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
 def test_handle_year_string_with_buildingage_year_as_None(dummy_property):
     dummy_property.year = dummy_data_property["buildingage_year"]
     assert dummy_property.year == "None"
-    dummy_property.handle_year_string()
-    assert dummy_property.year == 1959
-
-
-def test_handle_year_string_with_buildingage_year(dummy_property):
-    dummy_property.year = 1999
-    dummy_property.handle_year_string()
-    assert dummy_property.year == 1999
+    year = handle_year_string(dummy_property.year)
+    assert year == 1959
 
 
 def test_handle_year_string_with_buildingage_year_is_period(dummy_property):
     dummy_property.year = dummy_data_property["buildingage_period"]
     assert dummy_property.year == "1980-1989"
-    dummy_property.handle_year_string()
-    assert dummy_property.year == 1989
+    year = handle_year_string(dummy_property.year)
+    assert year == 1989
 
 
 def test_handle_connectivity_with_semi_connected(dummy_property):
     dummy_property.connectivity = dummy_data_property["connectivity"]
     assert dummy_property.connectivity == "Semi-Connected"
-    dummy_property.handle_connectivity()
-    assert dummy_property.connectivity == "Single-Connected"
+    connectivity = handle_connectivity(dummy_property.connectivity)
+    assert connectivity == "Single-Connected"
 
 
 dummy_end_connected = dummy_data[1]["properties"]
-
 
 @pytest.fixture
 def dummy_property_1():
@@ -101,8 +96,8 @@ def dummy_property_1():
 def test_handle_connectivity_with_end_connected(dummy_property_1):
 
     assert dummy_property_1.connectivity == "End-Connected"
-    dummy_property_1.handle_connectivity()
-    assert dummy_property_1.connectivity == "Dual-Connected"
+    connectivity = handle_connectivity(dummy_property_1.connectivity)
+    assert connectivity == "Dual-Connected"
 
 
 dummy_standalone = dummy_data[2]["properties"]
@@ -118,5 +113,5 @@ def dummy_property_2():
 
 def test_handle_connectivity_with_standalone(dummy_property_2):
     assert dummy_property_2.connectivity == "Standalone"
-    dummy_property_2.handle_connectivity()
-    assert dummy_property_2.connectivity == "Free-Standing"
+    connectivity = handle_connectivity(dummy_property_2.connectivity)
+    assert connectivity == "Free-Standing"

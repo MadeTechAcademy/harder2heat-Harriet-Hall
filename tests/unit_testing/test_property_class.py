@@ -1,6 +1,8 @@
 import sys
 import os
 
+from src.utils import handle_connectivity, handle_year_string
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
 
 from src.property import Property
@@ -27,38 +29,39 @@ def test_property_has_extra_attributes():
 
 def test_handle_year_string_with_year_as_None():
     property.year = "None"
-    property.handle_year_string()
-    assert property.year == 1959
+    year = handle_year_string(property.year)
+
+    assert year == 1959
 
 
 def test_handle_year_string_with_year_known():
     property.year = 1999
-    property.handle_year_string()
-    assert property.year == 1999
+    year = handle_year_string(property.year)
+    assert year == 1999
 
 
 def test_handle_year_string_with_buildingage_period():
     property.year = "1980-1989"
-    property.handle_year_string()
-    assert property.year == 1989
+    year = handle_year_string(property.year)
+    assert year == 1989
 
 
 def test_handle_connectivity_with_standalone():
     property.connectivity = "Standalone"
-    property.handle_connectivity()
-    assert property.connectivity == "Free-Standing"
+    connectivity = handle_connectivity(property.connectivity)
+    assert connectivity == "Free-Standing"
 
 
 def test_handle_connectivity_with_semi_connected():
     property.connectivity = "Semi-Connected"
-    property.handle_connectivity()
-    assert property.connectivity == "Single-Connected"
+    connectivity = handle_connectivity(property.connectivity)
+    assert connectivity == "Single-Connected"
 
 
 def test_handle_connectivity_with_end_connected():
     property.connectivity = "End-Connected"
-    property.handle_connectivity()
-    assert property.connectivity == "Dual-Connected"
+    connectivity = handle_connectivity(property.connectivity)
+    assert connectivity == "Dual-Connected"
 
 
 def test_calculate_score_with_hard_to_heat_attributes():
@@ -77,8 +80,9 @@ def test_calculate_score_with_non_hard_to_heat_attributes():
     property.calculate_score()
     assert property.score == 0
 
+
 def test_calculate_score_with_combination_of_attributes():
-    
+
     property.connectivity = "Standalone"
     property.material = ""
     property.year = "2000-2009"

@@ -1,3 +1,6 @@
+from src.utils import handle_connectivity, handle_year_string
+
+
 MINIMUM_FAILING_YEAR = 1959
 CONNECTIVITY_VALUES = {
     "Standalone": "Free-Standing",
@@ -31,26 +34,14 @@ class Property:
 
     def calculate_score(self):
         score = 0
-        self.handle_year_string()
-        self.handle_connectivity()
-        if self.connectivity == "Free-Standing":
+        year = handle_year_string(self.year)
+        connectivity = handle_connectivity(self.connectivity)
+        if connectivity == "Free-Standing":
             score += 1
         if self.material not in WARM_MATERIALS and self.material != "":
             score += 1
-        if self.year <= MINIMUM_FAILING_YEAR and self.year > 0:
+        if year <= MINIMUM_FAILING_YEAR and year > 0:
             score += 1
 
         self.score = score
     
-
-    def handle_year_string(self):
-        if self.year == "None" or self.year == "":
-            self.year = MINIMUM_FAILING_YEAR
-        elif type(self.year) is not int:
-            self.year = int(self.year[-4:])
-        else:   
-            self.year
-
-    def handle_connectivity(self):
-       self.connectivity = CONNECTIVITY_VALUES[self.connectivity]
-      
