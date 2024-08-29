@@ -10,20 +10,23 @@ class Council:
 
     def generate_property_class_list(self, properties_data):
 
-        for property_i in properties_data:
+        for property_data in properties_data:
 
-            property = property_i["properties"]
+            property = property_data["properties"]
+
 
             year_or_period = (
                 property["buildingage_year"]
                 if type(property["buildingage_year"]) is int
                 else property["buildingage_period"]
             )
+
+
             uprn = property["uprnreference"][0]["uprn"]
             year = year_or_period
             connectivity = property["connectivity"]
             material = property["constructionmaterial"]
-            coordinates = property_i["geometry"]["coordinates"][0]
+            coordinates = property_data["geometry"]["coordinates"][0]
             size = property["geometry_area_m2"]
             osid = property["osid"]
             age_updated_date = property["buildingage_updatedate"]
