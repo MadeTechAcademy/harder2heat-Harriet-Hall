@@ -16,6 +16,7 @@ def handle_year_string(year):
 
 
 def handle_connectivity(connectivity):
-    connectivity = CONNECTIVITY_VALUES[connectivity]
-    return connectivity
-    
+    if connectivity is not "":
+        connectivity = CONNECTIVITY_VALUES[connectivity]
+        return connectivity
+    return ""

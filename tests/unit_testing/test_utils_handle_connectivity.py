@@ -1,5 +1,11 @@
 from src.utils import handle_connectivity
 
+def test_handle_connectivity_with_empty_string():
+    connectivity = ""
+    property_connectivity = handle_connectivity(connectivity)
+    assert property_connectivity == ""
+
+
 def test_handle_connectivity_with_standalone():
     connectivity = "Standalone"
     property_connectivity = handle_connectivity(connectivity)
