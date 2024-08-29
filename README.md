@@ -31,7 +31,8 @@ To run the tests:
 
 E2e tests:
 
-- python -m coverage run -m behave tests/e2e_testing/features
+- python3 -m coverage run -m pytest tests/e2e_testing
+- python3 -m coverage run -m behave tests/e2e_testing/features
 
 
 Unit tests: 
