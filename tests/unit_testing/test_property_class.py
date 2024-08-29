@@ -48,7 +48,10 @@ def test_property_has_correct_connectivity_when_given_connectivity_as_standalone
 def test_property_has_correct_connectivity_when_given_connectivity_as_semi_connected():
     property = Property(1, "", "Semi-Connected", "", [], 0, "", "")
     assert property.connectivity == "Single-Connected"
-
+    
+def test_property_has_correct_connectivity_when_given_connectivity_as_end_connected():
+    property = Property(1, "", "End-Connected", "", [], 0, "", "")
+    assert property.connectivity == "Dual-Connected"
 
 def test_calculate_score_with_hard_to_heat_attributes():
     property.connectivity = "Free-Standing"
