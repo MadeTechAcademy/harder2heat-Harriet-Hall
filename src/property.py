@@ -1,4 +1,5 @@
-from src.utils import handle_connectivity, handle_year_string
+from src.property_connectivity import Connectivity
+from src.property_year import Year
 
 
 MINIMUM_FAILING_YEAR = 1959
@@ -23,8 +24,8 @@ class Property:
         age_updated_date,
     ):
         self.uprn = uprn
-        self.year = handle_year_string(year)
-        self.connectivity = handle_connectivity(connectivity)
+        self.year = Year(year)
+        self.connectivity = Connectivity(connectivity)
         self.material = material
         self.coordinates = coordinates
         self.size = size
