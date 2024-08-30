@@ -24,3 +24,8 @@ def test_handle_year_string_with_buildingage_period():
     year = Year("1980-1989")
     property_year = year.handle_year_string("1980-1989")
     assert property_year == 1989
+
+def test_get_year():
+    year = Year("None")
+    property_year = year.get_year()
+    assert property_year == 1959
