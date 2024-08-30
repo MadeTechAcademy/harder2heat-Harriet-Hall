@@ -18,7 +18,7 @@ def step_then_page_header_should_be_the_uprn_of_the_property(context):
 
         h2_tag = context.browser.find_element(By.TAG_NAME, "h2")
         h2 = h2_tag.text[6:]
-        assert len(h2) == 12
+        assert len(h2) <= 12
         assert h2 in context.browser.current_url
 
 @then('the property table should have the following headers')

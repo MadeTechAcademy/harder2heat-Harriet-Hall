@@ -19,8 +19,8 @@ def test_generate_property_class_list_updates_list_of_properties_with_dummy_data
     property = council.list_of_properties[0]
     assert isinstance(council.list_of_properties[0], Property)
     assert property.uprn == 100090062842
-    assert property.year == "1980-1989"
-    assert property.connectivity == "Semi-Connected"
+    assert property.year == 1989
+    assert property.connectivity == "Single-Connected"
     assert property.material == "Brick Or Block Or Stone"
     assert property.coordinates == [
         [0.0452889, 52.4569136],

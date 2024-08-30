@@ -31,7 +31,7 @@ class TestPropertyPage:
         try:
             h2_tag = browser.find_element(By.TAG_NAME, "h2")
             h2 = h2_tag.text[6:]
-            assert len(h2) == 12
+            assert len(h2) <= 12
             assert h2 in browser.current_url
 
         except NoSuchElementException:

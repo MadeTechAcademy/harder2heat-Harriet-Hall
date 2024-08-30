@@ -50,7 +50,7 @@ def test_generate_property_class_list_when_country_is_France(french_council):
 
     assert french_property.uprn == 1
     assert french_property.year == 1988
-    assert french_property.connectivity == "Semi-Connected"
+    assert french_property.connectivity == "Single-Connected"
     assert french_property.material == "Brick Or Block Or Stone"
     assert french_property.coordinates == [
         [0.0452889, 52.4569136],

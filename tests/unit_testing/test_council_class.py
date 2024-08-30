@@ -59,7 +59,7 @@ def test_generate_property_class_list_updates_list_of_properties(uk_council):
 
     assert property.uprn == 1
     assert property.year == 1988
-    assert property.connectivity == "Semi-Connected"
+    assert property.connectivity == "Single-Connected"
     assert property.material == "Brick Or Block Or Stone"
     assert property.coordinates == [
         [0.0452889, 52.4569136],
@@ -70,21 +70,27 @@ def test_generate_property_class_list_updates_list_of_properties(uk_council):
     assert property.osid == "123"
 
 
-property_1 = Property(1, 2000, "", "", [], 0, "", "")
-property_2 = Property(1, 1900, "", "", [], 0, "", "")
-
 
 def test_get_hardest_to_heat_properties_updates_property_score(uk_council):
+
+    property_1 = Property(1, 2000, "Semi-Connected", "Concrete", [], 0, "", "")
+    property_2 = Property(1, 1900, "Standalone", "", [], 0, "", "")
+
     uk_council.list_of_properties = [property_1, property_2]
     uk_council.get_hardest_to_heat_properties()
-
+    
     assert property_1.score == 0
-    assert property_2.score == 1
+    assert property_2.score == 3
 
 
 def test_get_hardest_to_heat_properties_sorts_list_of_properties_descenting(uk_council):
+  
+    property_1 = Property(1, 2000, "Semi-Connected", "", [], 0, "", "")
+    property_2 = Property(1, 1900, "Standalone", "", [], 0, "", "")
+
     uk_council.list_of_properties = [property_1, property_2]
     uk_council.get_hardest_to_heat_properties()
 
-    assert uk_council.list_of_properties[0].score == 1
-    assert uk_council.list_of_properties[1].score == 0
+    assert uk_council.list_of_properties[0] == property_2
+    assert uk_council.list_of_properties[1] == property_1
+    

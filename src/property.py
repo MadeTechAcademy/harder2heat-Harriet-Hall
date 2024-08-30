@@ -1,10 +1,13 @@
+from src.utils import handle_connectivity, handle_year_string
+
+
 MINIMUM_FAILING_YEAR = 1959
 CONNECTIVITY_VALUES = {
     "Standalone": "Free-Standing",
     "Semi-Connected": "Single-Connected",
     "End-Connected": "Dual-Connected",
 }
-WARM_MATERIALS = ["Brick Or Block Or Stone", "Contrete"]
+WARM_MATERIALS = ["Brick Or Block Or Stone", "Concrete"]
 
 
 class Property:
@@ -20,8 +23,8 @@ class Property:
         age_updated_date,
     ):
         self.uprn = uprn
-        self.year = year
-        self.connectivity = connectivity
+        self.year = handle_year_string(year)
+        self.connectivity = handle_connectivity(connectivity)
         self.material = material
         self.coordinates = coordinates
         self.size = size
@@ -31,29 +34,10 @@ class Property:
 
     def calculate_score(self):
         score = 0
-        self.handle_year_string()
-        self.handle_connectivity()
-        if self.connectivity == CONNECTIVITY_VALUES["Standalone"]:
+        if self.connectivity == "Free-Standing":
             score += 1
-        if self.material not in WARM_MATERIALS and self.material != "":
+        if self.material not in WARM_MATERIALS:
             score += 1
         if self.year <= MINIMUM_FAILING_YEAR and self.year > 0:
             score += 1
-
         self.score = score
-    
-    def handle_year_string(self):
-        if self.year == "None" or self.year == "":
-            self.year = MINIMUM_FAILING_YEAR
-        elif type(self.year) is not int:
-            self.year = int(self.year[-4:])
-        else:   
-            self.year
-
-    def handle_connectivity(self):
-        if self.connectivity == "Standalone":
-            self.connectivity = CONNECTIVITY_VALUES["Standalone"]
-        elif self.connectivity == "Semi-Connected":
-            self.connectivity = CONNECTIVITY_VALUES["Semi-Connected"]
-        else:
-            self.connectivity = CONNECTIVITY_VALUES["End-Connected"]
