@@ -35,12 +35,18 @@ class Property:
 
     def get_year(self):
         return self.year.get_year()
+  
+    
+    def get_connectivity(self):
+        return self.connectivity.get_connectivity()
 
 
     def calculate_score(self):
-        year = self.get_year(self.year)
+        year = self.get_year()
+        connectivity = self.get_connectivity()
+        
         score = 0
-        if self.connectivity == "Free-Standing":
+        if connectivity == "Free-Standing":
             score += 1
         if self.material not in WARM_MATERIALS:
             score += 1
