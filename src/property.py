@@ -33,12 +33,17 @@ class Property:
         self.age_updated_date = age_updated_date
         self.score = 0
 
+    def get_year(self):
+        return self.year.get_year()
+
+
     def calculate_score(self):
+        year = self.get_year(self.year)
         score = 0
         if self.connectivity == "Free-Standing":
             score += 1
         if self.material not in WARM_MATERIALS:
             score += 1
-        if self.year <= MINIMUM_FAILING_YEAR and self.year > 0:
+        if year <= MINIMUM_FAILING_YEAR and year > 0:
             score += 1
         self.score = score

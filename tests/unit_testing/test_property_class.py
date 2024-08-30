@@ -11,7 +11,7 @@ property = Property(1, 0, "End-Connected", "", [], 0, "", "")
 def test_property_has_correct_attributes():
 
     assert property.uprn == 1
-    assert property.year == 0
+    assert property.get_year() == 0
     assert property.connectivity == "Dual-Connected"
     assert property.material == ""
     assert property.score == 0
@@ -27,22 +27,22 @@ def test_property_has_extra_attributes():
 
 def test_property_has_correct_year_when_given_year_as_None():
     property = Property(1, "None", "End-Connected", "", [], 0, "", "")
-    assert property.year == 1959
+    assert property.get_year() == 1959
 
 
 def test_property_has_correct_year_when_given_year_as_empty_string():
     property = Property(1, "", "End-Connected", "", [], 0, "", "")
-    assert property.year == 1959
+    assert property.get_year() == 1959
 
 
 def test_property_has_correct_year_when_given_year_as_integer():
     property = Property(1, 1900, "End-Connected", "", [], 0, "", "")
-    assert property.year == 1900
+    assert property.get_year() == 1900
 
 
 def test_property_has_correct_year_when_given_year_as_period():
     property = Property(1, "1980-1989", "End-Connected", "", [], 0, "", "")
-    assert property.year == 1989
+    assert property.get_year() == 1989
 
 def test_property_has_correct_connectivity_when_given_connectivity_as_empty_string():
     property = Property(1, "", "", "", [], 0, "", "")
@@ -64,9 +64,8 @@ def test_property_has_correct_connectivity_when_given_connectivity_as_end_connec
 
 
 def test_calculate_score_with_hard_to_heat_attributes():
-    property.connectivity = "Free-Standing"
-    property.material = "not warm material"
-    property.year = 1959
+    property = Property(1, "", "Free-Standing", "", [], 0, "", "")
+    property.get_year() 
     property.calculate_score()
     assert property.score == 3
 
@@ -75,13 +74,13 @@ def test_calculate_score_with_non_hard_to_heat_attributes():
 
     property.connectivity = "Dual-Connected"
     property.material = "Concrete"
-    property.year = 2000
+    property.get_year() = 2000
     property.calculate_score()
     assert property.score == 0
     
     property.connectivity = "End-Connected"
     property.material = "Brick Or Block Or Stone"
-    property.year = 1960
+    property.get_year() = 1960
     property.calculate_score()
     assert property.score == 0
 
@@ -90,6 +89,6 @@ def test_calculate_score_with_combination_of_attributes():
 
     property.connectivity = "Free-Standing"
     property.material = ""
-    property.year = 2009
+    property.get_year() = 2009
     property.calculate_score()
     assert property.score == 2
