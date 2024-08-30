@@ -25,10 +25,10 @@
         <tr class="govuk-table__row">
           <td scope="row" class="govuk-table__cell">{{property.uprn}}</td>
           <td scope="row" class="govuk-table__cell" style="text-align: center">
-            {{property.year}}
+            {{property.get_year()}}
           </td>
           <td scope="row" class="govuk-table__cell">
-            {{property.connectivity}}
+            {{property.get_connectivity()}}
           </td>
           <td scope="row" class="govuk-table__cell">{{property.material}}</td>
           <td scope="row" class="govuk-table__cell">{{property.size}}</td>
