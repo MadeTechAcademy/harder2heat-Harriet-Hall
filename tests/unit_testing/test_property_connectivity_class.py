@@ -24,3 +24,8 @@ def test_handle_connectivity_with_end_connected():
     property_connectivity = connectivity.handle_connectivity("End-Connected")
     assert property_connectivity == "Dual-Connected"
 
+
+def test_get_connectivity():
+    connectivity = Connectivity("End-Connected")
+    property_connectivity = connectivity.get_connectivity()
+    assert property_connectivity == "Dual-Connected"

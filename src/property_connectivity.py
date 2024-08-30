@@ -5,7 +5,7 @@ CONNECTIVITY_VALUES = {
 }
 class Connectivity:
   def __init__(self, connectivity):
-    self.connectivity = self.handle_connectivity(connectivity) 
+    self._connectivity = self.handle_connectivity(connectivity) 
     
   def handle_connectivity(self, connectivity):
       if connectivity is not "":
@@ -13,3 +13,5 @@ class Connectivity:
      
       return connectivity
 
+  def get_connectivity(self):
+        return self._connectivity
