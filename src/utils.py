@@ -29,8 +29,7 @@ class HandleConnectivity:
 
 class SortProperties:
 
-    def get_hardest_to_heat_properties(properites_list):
+    def get_hardest_to_heat_properties(properties_list):
   
-       
-        return []
-
+        properties_list.sort(reverse=True, key=lambda property: property.score)
+        return properties_list
