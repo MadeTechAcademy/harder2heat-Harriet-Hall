@@ -26,3 +26,11 @@ class HandleConnectivity:
 
         return connectivity
 
+
+class SortProperties:
+
+    def get_hardest_to_heat_properties(properites_list):
+  
+       
+        return []
+
