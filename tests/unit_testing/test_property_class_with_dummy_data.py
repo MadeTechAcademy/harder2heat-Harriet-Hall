@@ -39,8 +39,8 @@ def dummy_property():
 def test_property_class_has_correct_attributes_from_dummy_data(dummy_property):
 
     assert dummy_property.uprn == 100090062842
-    assert dummy_property.get_year() == 1959
-    assert dummy_property.get_connectivity() == "Single-Connected"
+    assert dummy_property.year == 1959
+    assert dummy_property.connectivity == "Single-Connected"
     assert dummy_property.material == "Brick Or Block Or Stone"
     assert dummy_property.coordinates == [
         [0.0452889, 52.4569136],
