@@ -1,6 +1,4 @@
-from src.property_connectivity import Connectivity
-from src.property_year import Year
-
+from .utils import HandleConnectivity, HandleYear
 
 MINIMUM_FAILING_YEAR = 1959
 CONNECTIVITY_VALUES = {
@@ -24,8 +22,8 @@ class Property:
         age_updated_date,
     ):
         self.uprn = uprn
-        self.year = Year(year)
-        self.connectivity = Connectivity(connectivity)
+        self.year = HandleYear.handle_year_string(year)
+        self.connectivity = HandleConnectivity.handle_connectivity(connectivity)
         self.material = material
         self.coordinates = coordinates
         self.size = size
@@ -33,23 +31,14 @@ class Property:
         self.age_updated_date = age_updated_date
         self.score = 0
 
-    def get_year(self):
-        return self.year.get_year()
-  
-    
-    def get_connectivity(self):
-        return self.connectivity.get_connectivity()
-
 
     def calculate_score(self):
-        year = self.get_year()
-        connectivity = self.get_connectivity()
         
         score = 0
-        if connectivity == "Free-Standing":
+        if self.connectivity == "Free-Standing":
             score += 1
         if self.material not in WARM_MATERIALS:
             score += 1
-        if year <= MINIMUM_FAILING_YEAR and year > 0:
+        if self.year <= MINIMUM_FAILING_YEAR and self.year > 0:
             score += 1
         self.score = score
