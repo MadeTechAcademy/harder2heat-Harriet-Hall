@@ -46,13 +46,9 @@ Navigate to the mocking branch:
 
 - git checkout mocking 
 
-Navigate to the integration directory:
-
-- cd tests/integration_testing  
-
 Run the tests:
 
-- coverage run -m pytest test_client.py   
+- coverage run -m pytest tests/integration_testing/test_client.py   
 
 
 
