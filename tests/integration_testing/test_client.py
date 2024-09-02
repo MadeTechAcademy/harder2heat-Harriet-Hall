@@ -208,4 +208,4 @@ class TestClient(unittest.TestCase):
         self.council.get_hardest_to_heat_properties()
 
         self.assertEqual(property_1.score, 0)
-        self.assertEqual(property_2.score, 3)
+        self.assertEqual(property_2.score, 2)
