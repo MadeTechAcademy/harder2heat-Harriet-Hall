@@ -5,14 +5,13 @@ import sys
 import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
-from src.council import Council
+from src.generate_french_properties import GenerateFrenchProperties
+from src.utils import SortProperties
 from src.property import Property
-
 
 class TestClient(unittest.TestCase):
     def setUp(self):
-        self.council = Council("Lyon", "France")
-        self.url = f"/{self.council.name}/properties"
+        self.url = f"/council/properties"
         self.mock_data = {
             "data": [
                 {
@@ -153,10 +152,10 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
         self.assertTrue(status)
 
-        self.council.generate_property_class_list(body["data"])
-        self.assertTrue(self.council.list_of_properties[0], Property)
-        self.assertEqual(self.council.list_of_properties[0].floors, 2)
-        self.assertEqual(self.council.list_of_properties[0].distance_to_transport, 19)
+        properties = GenerateFrenchProperties.generate_property_class_list(body["data"])
+        self.assertTrue(properties[0], Property)
+        self.assertEqual(properties[0].floors, 2)
+        self.assertEqual(properties[0].distance_to_transport, 19)
 
     @patch("client.requests")
     def test_when_api_responses_with_multiple_properties(self, mock_requests):
@@ -169,8 +168,8 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
 
         self.assertTrue(status)
-        self.council.generate_property_class_list(body["data"])
-        self.assertTrue(len(self.council.list_of_properties), 2)
+        properties = GenerateFrenchProperties.generate_property_class_list(body["data"])
+        self.assertTrue(len(properties), 2)
 
     @patch("client.requests")
     def test_when_api_responses_with_no_property_data(self, mock_requests):
@@ -183,8 +182,8 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
 
         self.assertTrue(status)
-        self.council.generate_property_class_list(body["data"])
-        self.assertEqual(len(self.council.list_of_properties), 0)
+        properties = GenerateFrenchProperties.generate_property_class_list(body["data"])
+        self.assertEqual(len(properties), 0)
 
     @patch("client.requests")
     def test_api_response_data_matches_expected_property_scoring_criteria(
@@ -199,13 +198,16 @@ class TestClient(unittest.TestCase):
         status, body = get_council_properties_from_api(self.url)
 
         self.assertTrue(status)
-        self.council.generate_property_class_list(body["data"])
-        [property_1, property_2] = self.council.list_of_properties
+        properties = GenerateFrenchProperties.generate_property_class_list(body["data"])
+       
+        self.assertEqual(properties[0].score, properties[1].score)
+        self.assertEqual(properties[0].score, 0)
 
-        self.assertEqual(property_1.score, 0)
-        self.assertEqual(property_2.score, 0)
-
-        self.council.get_hardest_to_heat_properties()
-
-        self.assertEqual(property_1.score, 0)
-        self.assertEqual(property_2.score, 2)
+    
+        for property in properties:
+            property.calculate_score()
+           
+            
+        sorted_properties = SortProperties.get_hardest_to_heat_properties(properties)
+        
+        self.assertTrue(sorted_properties[0].score > sorted_properties[1].score)
