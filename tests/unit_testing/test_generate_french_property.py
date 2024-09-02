@@ -34,6 +34,34 @@ data = (
             "distance_to_public_transport_meters": 10,
         },
     },
+        {
+        "geometry": {
+            "coordinates": [
+                [
+                    [1.0452889, 23.4569136],
+                    [1.0453246, 23.4569215],
+                ]
+            ]
+        },
+        "properties": {
+            "osid": "456",
+            "connectivity": "Semi-Connected",
+            "uprnreference": [
+                {
+                    "uprn": 1,
+                }
+            ],
+            "buildingage_year": 2000,
+            "geometry_area_m2": 11,
+            "buildingage_period": "1980-1989",
+            "constructionmaterial": "Brick Or Block Or Stone",
+            "buildingage_updatedate": "2024-05-20",
+            "number_of_floors": 2,
+            "distance_to_public_transport_meters": 10,
+            "number_of_floors": 3,
+            "distance_to_public_transport_meters": 101,
+        },
+    },
 )
 
 
@@ -58,3 +86,9 @@ def test_french_property_has_correct_attributes():
     assert french_property.osid == "123"
     assert french_property.floors == 2
     assert french_property.distance_to_transport == 10
+    
+    
+def test_generate_french_property_with_multiple_properties():
+    
+    french_properties = GenerateFrenchProperties.generate_property_class_list(data)
+    assert len(french_properties) == 2
