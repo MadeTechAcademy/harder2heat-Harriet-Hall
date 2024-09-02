@@ -1,5 +1,4 @@
-from src.utils import handle_connectivity, handle_year_string
-
+from .utils import HandleConnectivity, HandleYear
 
 MINIMUM_FAILING_YEAR = 1959
 CONNECTIVITY_VALUES = {
@@ -23,8 +22,8 @@ class Property:
         age_updated_date,
     ):
         self.uprn = uprn
-        self.year = handle_year_string(year)
-        self.connectivity = handle_connectivity(connectivity)
+        self.year = HandleYear.handle_year_string(year)
+        self.connectivity = HandleConnectivity.handle_connectivity(connectivity)
         self.material = material
         self.coordinates = coordinates
         self.size = size
@@ -32,7 +31,9 @@ class Property:
         self.age_updated_date = age_updated_date
         self.score = 0
 
+
     def calculate_score(self):
+        
         score = 0
         if self.connectivity == "Free-Standing":
             score += 1

@@ -47,7 +47,7 @@ class TestHomePage:
             table = self.get_table(browser)
             headers = table.find_elements(By.TAG_NAME, "th")
 
-            assert len(headers) == 8
+            assert len(headers) == 7
             list_of_headers = []
 
             for header in headers:
@@ -60,7 +60,6 @@ class TestHomePage:
                 "Connectivity",
                 "Building materials",
                 "Size in m2",
-                "Coordinates",
                 "Hard To Heat Score:\n" "(easy) 0 - 3 (hard)",
                 "",
             ]
@@ -78,9 +77,8 @@ class TestHomePage:
             assert cells[2].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
             assert cells[3].text in ["Brick Or Block Or Stone", "Contrete"]
             assert type(float(cells[4].text)) == float or type(int(cells[4].text)) == int
-            assert type(cells[5].text) == str
-            assert cells[6].text in ["0", "1", "2", "3"]
-            assert cells[7].text == "See more details"
+            assert cells[5].text in ["0", "1", "2", "3"]
+            assert cells[6].text == "See more details"
 
 
         except NoSuchElementException:
