@@ -35,15 +35,15 @@ def step_check_table_headers(context):
     assert context.table[2][0] == headers[2].text
     assert context.table[3][0] == headers[3].text
     assert context.table[4][0] == headers[4].text
-    assert context.table[5][0] == headers[5].text
-    assert context.table[6][0] == headers[6].text.replace("\n", " ")
-    assert context.table[7][0] == headers[7].text
+    assert context.table[5][0] == headers[5].text.replace("\n", " ")
+    assert context.table[6][0] == headers[6].text
+
 
 
 @then("the homepage table should have 8 headers in total")
-def step_and_the_table_should_have_8_headers(context):
+def step_and_the_table_should_have_7_headers(context):
     headers = context.browser.find_elements(By.TAG_NAME, "th")
-    assert len(headers) == 8
+    assert len(headers) == 7
 
 
 @then("the table data should be accurate")
@@ -57,9 +57,8 @@ def step_check_table_data(context):
     assert isinstance(float(cells[4].text), float) or isinstance(
         int(cells[4].text), int
     )
-    assert isinstance(cells[5].text, str)
-    assert cells[6].text in ["0", "1", "2", "3"]
-    assert cells[7].text == "See more details"
+    assert cells[5].text in ["0", "1", "2", "3"]
+    assert cells[6].text == "See more details"
 
 
 @then("the table should display more than 1 properties")

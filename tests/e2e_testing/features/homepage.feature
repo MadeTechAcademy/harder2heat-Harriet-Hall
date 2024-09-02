@@ -17,7 +17,6 @@ Feature: Home Page
       | Connectivity                            |
       | Building materials                      |
       | Size in m2                              |
-      | Coordinates                             |
       | Hard To Heat Score: (easy) 0 - 3 (hard) |
       |                                         |
     And the homepage table should have 8 headers in total
