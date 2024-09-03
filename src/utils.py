@@ -21,7 +21,7 @@ class HandleYear:
 class HandleConnectivity:
 
     def handle_connectivity(connectivity):
-        if connectivity is not "":
+        if connectivity != "":
             connectivity = CONNECTIVITY_VALUES[connectivity]
 
         return connectivity
