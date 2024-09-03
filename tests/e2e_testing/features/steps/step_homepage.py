@@ -12,10 +12,11 @@ def step_open_home_page(context):
     context.browser.get("http://127.0.0.1:5000")
     context.browser.implicitly_wait(10)
 
+
 @then('the browser title bar should display "Harder to Heat Homes"')
 def step_check_browser_bar_title(context):
-    
-    assert context.browser.title == "Harder to Heat Homes"  
+
+    assert context.browser.title == "Harder to Heat Homes"
 
 
 @then('the main title should be "{title}"')
@@ -39,7 +40,6 @@ def step_check_table_headers(context):
     assert context.table[6][0] == headers[6].text
 
 
-
 @then("the homepage table should have 8 headers in total")
 def step_and_the_table_should_have_7_headers(context):
     headers = context.browser.find_elements(By.TAG_NAME, "th")
@@ -54,9 +54,7 @@ def step_check_table_data(context):
     assert isinstance(cells[1].text, (str, int))
     assert cells[2].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
     assert cells[3].text in ["Brick Or Block Or Stone", "Concrete"]
-    assert isinstance(float(cells[4].text), float) or isinstance(
-        int(cells[4].text), int
-    )
+    assert type(float(cells[4].text)) == float
     assert cells[5].text in ["0", "1", "2", "3"]
     assert cells[6].text == "See more details"
 
@@ -100,15 +98,17 @@ def step_check_button_style(context, style):
     assert button.get_attribute("style") == style
 
 
-@when('I click on the "See more details" button for the property with "{URPN}" as its UPRN')
+@when(
+    'I click on the "See more details" button for the property with "{URPN}" as its UPRN'
+)
 def step_click_see_more_button(context, URPN):
 
     button_href = f'//a[contains(@href, "{URPN}")]'
     button = context.browser.find_element(By.XPATH, button_href)
-    context.property_url = button.get_attribute('href')
+    context.property_url = button.get_attribute("href")
     button.click()
     WebDriverWait(context.browser, 10).until(EC.url_to_be(context.property_url))
-    
+
 
 @then("I should be navigated to the correct property page")
 def step_check_navigated_url(context):
