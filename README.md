@@ -14,7 +14,7 @@ Set up a python virtual environment:
 - python3 -m venv . 
 
 Activate the virtual environment:
-- Source bin/activate 
+- source bin/activate 
 
 Install the dependencies:
 - pip install -r requirements.txt
