@@ -25,14 +25,18 @@ def step_then_page_header_should_be_the_uprn_of_the_property(context):
 def step_then_table_should_have_headers(context):
 
     headers = context.browser.find_elements(By.TAG_NAME, "th")
-
-    assert context.table[0][0] == headers[0].text
-    assert context.table[1][0] == headers[1].text
-    assert context.table[2][0] == headers[2].text
-    assert context.table[3][0] == headers[3].text
-    assert context.table[4][0] == headers[4].text
-    assert context.table[5][0] == headers[5].text
-    assert context.table[6][0] == headers[6].text.replace("\n", "")
+    headers_from_browser = []
+    for header in headers:
+            headers_from_browser.append(header.text)
+    assert headers_from_browser == ['OSID:','Year Built:', 'Year Built last updated:','Connectivity:', 'Building materials:', 'Size in m2:', 'Coordinates:', 'Hard To Heat Score:\n(easy) 0 - 3 (hard)']       
+    
+    assert context.table[0][0] == headers_from_browser[0]
+    assert context.table[1][0] == headers_from_browser[1]
+    assert context.table[2][0] == headers_from_browser[2]
+    assert context.table[3][0] == headers_from_browser[3]
+    assert context.table[4][0] == headers_from_browser[4]
+    assert context.table[5][0] == headers_from_browser[5]
+    assert context.table[6][0] == headers_from_browser[6].replace("\n", "")
 
 @then('the property table should have 8 headers in total')
 def step_and_the_table_should_have_8_headers(context):
@@ -44,12 +48,12 @@ def step_then_table_should_display_valid_property_data(context):
 
         cells = context.browser.find_elements(By.TAG_NAME, "td")
 
-        assert type(cells[0].text) == str
+        assert type(cells[0].text) == str 
         assert type(cells[1].text) in [str, int]
         assert type(cells[2].text) == str
         assert cells[3].text in ["Free-Standing", "Single-Connected", "Dual-Connected"]
         assert cells[4].text in ["Brick Or Block Or Stone", "Concrete"]
-        assert type(float(cells[5].text)) in [float, int]
+        assert type(float(cells[5].text)) == float
         assert type(cells[6].text) == str
         assert cells[7].text in ["0", "1", "2", "3"]
 
