@@ -103,7 +103,7 @@ class TestClient(unittest.TestCase):
         self.assertEqual(body, "Status code: 404, Not Found")
 
     @patch("client.requests")
-    def test_get_council_properties_from_api_returns_status_code_not_already_tested(self, mock_requests):
+    def test_get_council_properties_from_api_returns_error_message(self, mock_requests):
 
         mock_response = MagicMock()
         mock_response.status_code = 400
